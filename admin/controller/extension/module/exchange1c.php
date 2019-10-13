@@ -1627,6 +1627,7 @@ class ControllerExtensionModuleExchange1c extends Controller {
 
 		$uploaded_file = $this->request->files['file']['tmp_name'];
 
+
 		if (!empty($this->request->files['file']['name']) && is_file($uploaded_file)) {
 
 			//$filename = basename(html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8'));
@@ -1652,21 +1653,22 @@ class ControllerExtensionModuleExchange1c extends Controller {
 					}
 				}
 
+
 				// Порядок обработки файлов
 				sort($xmlFiles);
 				foreach ($xmlFiles as $file) {
 					$this->log('Обрабатывается файл основной: ' . $file, 2);
-					$error = $this->modeImport($cache . $file);
+					$error = $this->modeImport(DIR_CACHE . 'exchange1c/' . $file);
 					if ($error) return $error;
 				}
 				foreach ($properties as $file) {
 					$this->log('Обрабатывается файл свойств: ' . $file, 2);
-					$error = $this->modeImport($cache . $file);
+					$error = $this->modeImport(DIR_CACHE . 'exchange1c/' . $file);
 					if ($error) return $error;
 				}
 				foreach ($goods as $file) {
 					$this->log('Обрабатывается файл товаров: ' . $file, 2);
-					$error = $this->modeImport($cache . $file);
+					$error = $this->modeImport(DIR_CACHE . 'exchange1c/' . $file);
 					if ($error) return $error;
 				}
 
