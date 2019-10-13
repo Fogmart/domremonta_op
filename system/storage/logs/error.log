@@ -1,0 +1,4 @@
+2019-10-13 3:09:29 - Включен модуль Exchange 1C 8.x версии 1.6.3.5
+2019-10-13 3:09:39 - PHP Notice:  Undefined index: help_upload in D:\proj\opencart2\admin\view\template\extension\module\exchange1c.tpl on line 952
+2019-10-13 3:09:39 - PHP Notice:  Undefined index: help_download_orders in D:\proj\opencart2\admin\view\template\extension\module\exchange1c.tpl on line 966
+2019-10-13 3:09:39 - PHP Notice:  Undefined index: button_download_orders in D:\proj\opencart2\admin\view\template\extension\module\exchange1c.tpl on line 968
