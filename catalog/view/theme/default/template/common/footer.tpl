@@ -1,45 +1,18 @@
 <footer>
   <div class="container">
-    <div class="row">
-      <?php if ($informations) { ?>
-      <div class="col-sm-3">
-        <h5><?php echo $text_information; ?></h5>
-        <ul class="list-unstyled">
-          <?php foreach ($informations as $information) { ?>
-          <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-          <?php } ?>
-        </ul>
-      </div>
-      <?php } ?>
-      <div class="col-sm-3">
-        <h5><?php echo $text_service; ?></h5>
-        <ul class="list-unstyled">
-          <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-          <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
-          <li><a href="<?php echo $sitemap; ?>"><?php echo $text_sitemap; ?></a></li>
-        </ul>
-      </div>
-      <div class="col-sm-3">
-        <h5><?php echo $text_extra; ?></h5>
-        <ul class="list-unstyled">
-          <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
-          <li><a href="<?php echo $voucher; ?>"><?php echo $text_voucher; ?></a></li>
-          <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
-          <li><a href="<?php echo $special; ?>"><?php echo $text_special; ?></a></li>
-        </ul>
-      </div>
-      <div class="col-sm-3">
-        <h5><?php echo $text_account; ?></h5>
-        <ul class="list-unstyled">
-          <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
-          <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-          <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-          <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+    <ul class="list-inline">
+      <li><img src="<?php echo $logo; ?>"
+               style="width: 100px;"
+               title="<?php echo $name; ?>" alt="<?php echo $name; ?>" class="img-responsive" />
+      </li>
+      <li><a href="<?php echo $informations[0]['href']; ?>"><?php echo $text_about ?></a></li>
+      <li><a href="<?php echo $informations[1]['href']; ?>"><?php echo  $informations[1]['title']; ?></a></li>
+      <li><a href="<?php echo $informations[4]['href']; ?>"><?php echo  $informations[4]['title']; ?></a></li>
+      <li><a href="<?php echo $informations[5]['href']; ?>"><?php echo $informations[5]['title']; ?></a></li>
+      <li><?php echo $text_addr; ?></li>
+      <li>Социальные сети </li>
+      <li>Логотипы принимаемых платежных систем </li>
+    </ul>
 </footer>
-
 
 </body></html>

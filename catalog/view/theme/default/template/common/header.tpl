@@ -38,6 +38,7 @@
 <?php } ?>
 </head>
 <body class="<?php echo $class; ?>">
+
 <header>
   <div class="container">
     <div class="row">

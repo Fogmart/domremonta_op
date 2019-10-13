@@ -19,6 +19,11 @@ class ControllerCommonFooter extends Controller {
 		$data['text_order'] = $this->language->get('text_order');
 		$data['text_wishlist'] = $this->language->get('text_wishlist');
 		$data['text_newsletter'] = $this->language->get('text_newsletter');
+		$data['text_about'] = $this->language->get('text_about');
+		$data['text_getandpay'] = $this->language->get('text_getandpay');
+		$data['text_forcompanies'] = $this->language->get('text_forcompanies');
+		$data['text_news'] = $this->language->get('text_news');
+		$data['text_addr'] = $this->config->get('config_address');
 
 		$this->load->model('catalog/information');
 
@@ -32,6 +37,17 @@ class ControllerCommonFooter extends Controller {
 				);
 			}
 		}
+        if ($this->request->server['HTTPS']) {
+            $server = $this->config->get('config_ssl');
+        } else {
+            $server = $this->config->get('config_url');
+        }
+
+        if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
+            $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+        } else {
+            $data['logo'] = '';
+        }
 
 		$data['contact'] = $this->url->link('information/contact');
 		$data['return'] = $this->url->link('account/return/add', '', true);

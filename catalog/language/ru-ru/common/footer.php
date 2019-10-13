@@ -14,4 +14,8 @@ $_['text_account']      = 'Личный Кабинет';
 $_['text_order']        = 'История заказов';
 $_['text_wishlist']     = 'Закладки';
 $_['text_newsletter']   = 'Рассылка';
+$_['text_about']        = 'О компании';
+$_['text_getandpay']    = 'Получение и оплата';
+$_['text_forcompanies'] = 'Компаниям';
+$_['text_news']         = 'Новости';
 $_['text_powered']      = 'Работает на <a href="http://opencart-russia.ru">OpenCart "Русская сборка"</a><br /> %s &copy; %s';
