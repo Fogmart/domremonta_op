@@ -1,6 +1,6 @@
 <footer>
   <div class="container">
-    <ul class="list-inline">
+    <ul class="list-inline lst-footer">
       <li><img src="<?php echo $logo; ?>"
                style="width: 100px;"
                title="<?php echo $name; ?>" alt="<?php echo $name; ?>" class="img-responsive" />
@@ -14,5 +14,9 @@
       <li>Логотипы принимаемых платежных систем </li>
     </ul>
 </footer>
-
+<style>
+  .lst-footer > li {
+    margin-bottom: -10px;
+  }
+</style>
 </body></html>
