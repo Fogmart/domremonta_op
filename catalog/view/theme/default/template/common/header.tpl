@@ -69,13 +69,16 @@
             <li><a href="<?php echo $informations[4]['href']; ?>">Компаниям</a></li>
             <li><a href="<?php echo $informations[5]['href']; ?>">Новости</a></li>
             <li><a href="<?php echo $informations[6]['href']; ?>">Контакты</a></li>
+            <?php if (!$logged) {?>
             <li><span>Вход/Регистрация</span>
               <ul>
                 <li><a href="<?=$loginform?>">Страница входа</a></li>
                 <li><a href="<?=$registerform?>">Страница регистрации</a></li>
               </ul>
             </li>
-            <li><a href="#">Личный кабинет</a></li>
+            <?} else {?>
+            <li><a href="<?=$lkform?>">Личный кабинет</a></li>
+            <?} ?>
           </ul>
         </nav>
       </div>

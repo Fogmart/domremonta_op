@@ -37,6 +37,7 @@ class ControllerCommonHeader extends Controller {
 
 		$data['name'] = $this->config->get('config_name');
 
+        $data['lkform'] = $this->url->link('account/account', '', true);
         $data['loginform'] = $this->url->link('account/login', '', true);
         $data['registerform'] = $this->url->link('account/register', '', true);
 
@@ -76,6 +77,7 @@ class ControllerCommonHeader extends Controller {
 		$data['home'] = $this->url->link('common/home');
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
 		$data['logged'] = $this->customer->isLogged();
+
 		$data['account'] = $this->url->link('account/account', '', true);
 		$data['register'] = $this->url->link('account/register', '', true);
 		$data['login'] = $this->url->link('account/login', '', true);
