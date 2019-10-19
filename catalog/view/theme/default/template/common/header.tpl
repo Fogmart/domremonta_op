@@ -42,6 +42,45 @@
 <header>
   <div class="container">
     <div class="row">
+      <div class="col-sm-12">
+        <nav id="primary_nav_wrap">
+          <ul>
+            <li><span>О компании</span>
+              <ul>
+                <li>
+                  <a href="<?php echo $informations[0]['href']; ?>">Информация о компании</a></li>
+                <li><a href="<?php echo $informations[7]['href']; ?>">Гарантии и обязательства</a></li>
+                <li><a href="<?php echo $informations[8]['href']; ?>">Информация и документация</a></li>
+                <li><a href="<?php echo $informations[9]['href']; ?>">Каталог производителей</a>
+                <li><a href="<?php echo $informations[10]['href']; ?>">Полный прайс-лист для оптовых покупателей </a></li>
+              </ul>
+            </li>
+            <li><span>Получение и оплата</span>
+              <ul>
+                <li><span>Получение</span>
+                  <ul>
+                    <li><a href="<?php echo $informations[11]['href']; ?>">Пункты самовывоза </a></li>
+                    <li><a href="<?php echo $informations[12]['href']; ?>">Доставка </a></li>
+                  </ul>
+                </li>
+                <li><a href="<?php echo $informations[13]['href']; ?>">Оплата</a></li>
+              </ul>
+            </li>
+            <li><a href="<?php echo $informations[4]['href']; ?>">Компаниям</a></li>
+            <li><a href="<?php echo $informations[5]['href']; ?>">Новости</a></li>
+            <li><a href="<?php echo $informations[6]['href']; ?>">Контакты</a></li>
+            <li><span>Вход/Регистрация</span>
+              <ul>
+                <li><a href="<?=$loginform?>">Страница входа</a></li>
+                <li><a href="<?=$registerform?>">Страница регистрации</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Личный кабинет</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-sm-2">
         <div id="logo">
           <?php if ($logo) { ?>
@@ -61,7 +100,10 @@
           <span class="hidden-xs hidden-sm hidden-md"><?php echo $text_wishlist; ?></span></a>
       </div>
     </div>
+
   </div>
+
+
 </header>
 <?php if ($categories) { ?>
 <div class="container">
@@ -94,4 +136,6 @@
     </div>
   </nav>
 </div>
+
+
 <?php } ?>

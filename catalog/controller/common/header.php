@@ -37,6 +37,9 @@ class ControllerCommonHeader extends Controller {
 
 		$data['name'] = $this->config->get('config_name');
 
+        $data['loginform'] = $this->url->link('account/login', '', true);
+        $data['registerform'] = $this->url->link('account/register', '', true);
+
 		if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
 			$data['logo'] = $server . 'image/' . $this->config->get('config_logo');
 		} else {
@@ -84,6 +87,19 @@ class ControllerCommonHeader extends Controller {
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
+
+        $this->load->model('catalog/information');
+
+        $data['informations'] = array();
+
+        foreach ($this->model_catalog_information->getInformations() as $result) {
+            if ($result['bottom']) {
+                $data['informations'][] = array(
+                    'title' => $result['title'],
+                    'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+                );
+            }
+        }
 
 		// Menu
 		$this->load->model('catalog/category');
