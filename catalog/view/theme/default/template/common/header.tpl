@@ -18,10 +18,12 @@
 <meta name="keywords" content= "<?php echo $keywords; ?>" />
 <?php } ?>
 <script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="catalog/view/javascript/jquery/fancybox-2.1.7/source/jquery.fancybox.js"></script>
 <link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 <script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
+<link href="catalog/view/javascript/jquery/fancybox-2.1.7/source/jquery.fancybox.css" rel="stylesheet">
 <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
 <?php foreach ($styles as $style) { ?>
 <link href="<?php echo $style['href']; ?>" type="text/css" rel="<?php echo $style['rel']; ?>" media="<?php echo $style['media']; ?>" />
@@ -138,6 +140,53 @@
       </ul>
     </div>
   </nav>
+</div>
+
+<div id="fixedfooter">
+  <div > <button id="foorer_feedback">Обратная связь</button> </div>
+  <div ><button id="foorer_subscr">Подписка</button> </div>
+  <div id="footercart"><?=$cart_f?></div>
+</div>
+
+<div class="floating-form" id="subscr">
+  <div class="floating-form-heading">Подписка на рассылку</div>
+  <div id="subs_results"></div>
+  <label><span>e-mail<span class="required">*</span></span>
+    <input type="email" name="email_s" maxlength="70" required="required" class="input-field">
+  </label>
+  <label>
+    <input type="submit" id="subscr_btn" value="отправить">
+  </label>
+</div>
+
+<div class="floating-form" id="contact_form">
+  <div class="floating-form-heading">Заполните форму</div>
+  <div id="contact_results"></div>
+  <div id="contact_body">
+  <label><span>Тема <span class="required">*</span></span>
+      <input type="text" name="name" id="subj" required="required" class="input-field">
+  </label>
+  <label><span>Имя <span class="required">*</span></span>
+    <input type="text" name="name" id="name" required="required" class="input-field">
+  </label>
+  <label><span>Телефон <span class="required">*</span></span>
+    <input type="text" name="phone2" maxlength="20" required="required" class="input-field">
+  </label>
+  <label><span>e-mail<span class="required">*</span></span>
+    <input type="email" name="email" maxlength="70" required="required" class="input-field">
+  </label>
+  <label><span>Текст </span>
+    <textarea name="message" id="message" class="textarea-field" required="required"></textarea>
+  </label>
+  <label>
+    <?=$captcha?>
+  </label>
+
+  <label>
+    <span> </span><input type="submit" id="submit_btn" value="отправить">
+  </label>
+  </div>
+
 </div>
 
 

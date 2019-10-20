@@ -143,7 +143,73 @@ $(document).ready(function() {
 	$(document).ajaxStop(function() {
 		$('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 	});
+
+	$("#foorer_feedback").click(openfeedback)
+	$("#foorer_feedback").click(openfeedback)
+	$("#foorer_subscr").click(opensubscr)
+	$("#submit_btn").click(sendfb)
+	$("#subscr_btn").click(sendSubs)
 });
+
+function openfeedback() {
+	$.fancybox($("#contact_form"))
+}
+function opensubscr() {
+	$.fancybox($("#subscr"))
+}
+
+function sendSubs() {
+	post_data = {
+		'email' : $('input[name=email_s]').val()
+	};
+	$.post('/?route=ajax/subscribe/ajaxSend', post_data, function(response){
+		if(response.type == 'error'){ //обрабатываем ответ сервера
+			output = '<div class="error">'+response.text+'</div>';
+		} else {
+			output = '<div class="success">'+response.text+'</div>';
+		}
+		$("#subs_results").hide().html(output).slideDown();
+	}, 'json');
+}
+
+function sendfb() {
+	var proceed = true;
+	//Простая валидация на стороне клиента
+	//Пробегаем по каждому полю и просто меняем цвет рамки на красный,
+	//в случае ошибки заполнения
+	$("#contact_form input[required=required]").each(function(){
+		$(this).css('border-color','');
+		//если поле пустое
+		if(!$.trim($(this).val())){
+			$(this).css('border-color','red'); //меняем цвета рамки на красный
+			proceed = false; //устанавливаем «стоп» флаг.
+		}
+	});
+
+	if (proceed) {  //валидация прошла без ошибок, идем дальше.
+		//извлекаем содержимое полей нашей формы, создаем объект
+		post_data = {
+			'user_name' : $('input[name=name]').val(),
+			'phone_number' : $('input[name=phone2]').val(),
+			'captcha' : $('input[name=captcha]').val(),
+			'email' : $('input[name=email]').val(),
+			'subj' : $('input[name=subj]').val(),
+			'msg': $('textarea[name=message]').val()
+		};
+
+		//Передаем форму через AJAX методом POST
+		$.post('/?route=ajax/feedback/ajaxSend', post_data, function(response){
+			if(response.type == 'error'){ //обрабатываем ответ сервера
+				output = '<div class="error">'+response.text+'</div>';
+			} else {
+				output = '<div class="success">'+response.text+'</div>';
+				//очищаем поля фрмы
+				$("#contact_form  input[required=required], #contact_form textarea").val('');
+			}
+			$("#contact_form #contact_results").hide().html(output).slideDown();
+		}, 'json');
+	}
+}
 
 // Cart add remove functions
 var cart = {
@@ -155,9 +221,11 @@ var cart = {
 			dataType: 'json',
 			beforeSend: function() {
 				$('#cart > button').button('loading');
+				$('#cart2 > button').button('loading');
 			},
 			complete: function() {
 				$('#cart > button').button('reset');
+				$('#cart2 > button').button('reset');
 			},
 			success: function(json) {
 				$('.alert, .text-danger').remove();
@@ -172,6 +240,7 @@ var cart = {
 					// Need to set timeout otherwise it wont update the total
 					setTimeout(function () {
 						$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+						$('#cart2 > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
 					}, 100);
 
 					$('html, body').animate({ scrollTop: 0 }, 'slow');

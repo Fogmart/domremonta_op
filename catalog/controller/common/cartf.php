@@ -1,5 +1,5 @@
 <?php
-class ControllerCommonCart extends Controller {
+class ControllerCommonCartf extends Controller {
 	public function index() {
 		$this->load->language('common/cart');
 
@@ -141,7 +141,7 @@ class ControllerCommonCart extends Controller {
 		$data['cart'] = $this->url->link('checkout/cart');
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
 
-		return $this->load->view('common/cart', $data);
+		return $this->load->view('common/cartf', $data);
 	}
 
 	public function info() {

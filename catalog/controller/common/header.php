@@ -90,6 +90,9 @@ class ControllerCommonHeader extends Controller {
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
 
+
+        $data['captcha'] = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha'), $this->error);
+
         $this->load->model('catalog/information');
 
         $data['informations'] = array();
@@ -145,6 +148,7 @@ class ControllerCommonHeader extends Controller {
 		$data['currency'] = $this->load->controller('common/currency');
 		$data['search'] = $this->load->controller('common/search');
 		$data['cart'] = $this->load->controller('common/cart');
+		$data['cart_f'] = $this->load->controller('common/cartf');
 
 		// For page specific css
 		if (isset($this->request->get['route'])) {
