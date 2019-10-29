@@ -35,12 +35,36 @@
             </div>
           </div>
           <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="email" value="<?php echo $email; ?>" placeholder="<?php echo $entry_email; ?>" id="input-email" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-product"><span data-toggle="tooltip" title="<?php echo $help_product; ?>"><?php echo $entry_product; ?></span></label>
             <div class="col-sm-10">
               <input type="text" name="product" value="<?php echo $product; ?>" placeholder="<?php echo $entry_product; ?>" id="input-product" class="form-control" />
               <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
               <?php if ($error_product) { ?>
               <div class="text-danger"><?php echo $error_product; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-text"><?php echo $entry_goods; ?></label>
+            <div class="col-sm-10">
+              <textarea name="good" cols="60" rows="8" placeholder="<?php echo $entry_goods; ?>" id="input-text" class="form-control"><?php echo $good; ?></textarea>
+              <?php if ($error_goods) { ?>
+              <div class="text-danger"><?php echo $error_text; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-text"><?php echo $entry_bads; ?></label>
+            <div class="col-sm-10">
+              <textarea name="bad" cols="60" rows="8" placeholder="<?php echo $entry_bads; ?>" id="input-text" class="form-control"><?php echo $bad; ?></textarea>
+              <?php if ($error_bads) { ?>
+              <div class="text-danger"><?php echo $error_bads; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -53,59 +77,7 @@
               <?php } ?>
             </div>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_rating; ?></label>
-            <div class="col-sm-10">
-              <label class="radio-inline">
-                <?php if ($rating == 1) { ?>
-                <input type="radio" name="rating" value="1" checked="checked" />
-                1
-                <?php } else { ?>
-                <input type="radio" name="rating" value="1" />
-                1
-                <?php } ?>
-              </label>
-              <label class="radio-inline">
-                <?php if ($rating == 2) { ?>
-                <input type="radio" name="rating" value="2" checked="checked" />
-                2
-                <?php } else { ?>
-                <input type="radio" name="rating" value="2" />
-                2
-                <?php } ?>
-              </label>
-              <label class="radio-inline">
-                <?php if ($rating == 3) { ?>
-                <input type="radio" name="rating" value="3" checked="checked" />
-                3
-                <?php } else { ?>
-                <input type="radio" name="rating" value="3" />
-                3
-                <?php } ?>
-              </label>
-              <label class="radio-inline">
-                <?php if ($rating == 4) { ?>
-                <input type="radio" name="rating" value="4" checked="checked" />
-                4
-                <?php } else { ?>
-                <input type="radio" name="rating" value="4" />
-                4
-                <?php } ?>
-              </label>
-              <label class="radio-inline">
-                <?php if ($rating == 5) { ?>
-                <input type="radio" name="rating" value="5" checked="checked" />
-                5
-                <?php } else { ?>
-                <input type="radio" name="rating" value="5" />
-                5
-                <?php } ?>
-              </label>
-              <?php if ($error_rating) { ?>
-              <div class="text-danger"><?php echo $error_rating; ?></div>
-              <?php } ?>
-            </div>
-          </div>
+
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-date-added"><?php echo $entry_date_added; ?></label>
             <div class="col-sm-3">

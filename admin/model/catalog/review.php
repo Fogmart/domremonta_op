@@ -1,7 +1,16 @@
 <?php
 class ModelCatalogReview extends Model {
 	public function addReview($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "review SET author = '" . $this->db->escape($data['author']) . "', product_id = '" . (int)$data['product_id'] . "', text = '" . $this->db->escape(strip_tags($data['text'])) . "', rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = '" . $this->db->escape($data['date_added']) . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "review SET 
+		author = '" . $this->db->escape($data['author']) .
+            "', product_id = '" . (int)$data['product_id'] .
+            "', text = '" . $this->db->escape(strip_tags($data['text'])) .
+//            "', rating = '" . (int)$data['rating'] .
+            "', status = '" . (int)$data['status'] .
+            "', good = '" . $this->db->escape($data['good']) .
+            "', bad = '" . $this->db->escape($data['bad']) .
+            "', email = '" . $this->db->escape($data['email']) .
+            "', date_added = '" . $this->db->escape($data['date_added']) . "'");
 
 		$review_id = $this->db->getLastId();
 
@@ -11,7 +20,13 @@ class ModelCatalogReview extends Model {
 	}
 
 	public function editReview($review_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "review SET author = '" . $this->db->escape($data['author']) . "', product_id = '" . (int)$data['product_id'] . "', text = '" . $this->db->escape(strip_tags($data['text'])) . "', rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = '" . $this->db->escape($data['date_added']) . "', date_modified = NOW() WHERE review_id = '" . (int)$review_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "review SET author = '" .
+            $this->db->escape($data['author']) .
+            "', product_id = '" . (int)$data['product_id'] .
+            "', text = '" . $this->db->escape(strip_tags($data['text'])) .
+//            "', rating = '" . (int)$data['rating'] .
+            "', status = '" . (int)$data['status'] .
+            "', date_added = '" . $this->db->escape($data['date_added']) . "', date_modified = NOW() WHERE review_id = '" . (int)$review_id . "'");
 
 		$this->cache->delete('product');
 	}

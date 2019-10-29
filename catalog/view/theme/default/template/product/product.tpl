@@ -67,42 +67,47 @@
             <?php } ?>
             <?php if ($review_status) { ?>
             <div class="tab-pane" id="tab-review">
-              <form class="form-horizontal" id="form-review">
-                <div id="review"></div>
+              <div id="review"></div>
+              <form class="form-horizontal" id="form-review" style="display: none">
                 <h2><?php echo $text_write; ?></h2>
                 <?php if ($review_guest) { ?>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-good"><?php echo $entry_goods; ?></label>
+                    <textarea name="good" rows="2" id="input-good" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-bad"><?php echo $entry_bads; ?></label>
+                    <textarea name="bad" rows="2" id="input-bad" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-review"><?php echo $entry_review; ?></label>
+                    <textarea name="text" rows="4" id="input-review" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-name"><?php echo $entry_email; ?></label>
+                    <input type="text" name="email" value="<?php echo $customer_email; ?>" id="input-name" class="form-control" />
+                  </div>
+                </div>
                 <div class="form-group required">
                   <div class="col-sm-12">
                     <label class="control-label" for="input-name"><?php echo $entry_name; ?></label>
                     <input type="text" name="name" value="<?php echo $customer_name; ?>" id="input-name" class="form-control" />
                   </div>
                 </div>
-                <div class="form-group required">
-                  <div class="col-sm-12">
-                    <label class="control-label" for="input-review"><?php echo $entry_review; ?></label>
-                    <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
-                    <div class="help-block"><?php echo $text_note; ?></div>
-                  </div>
-                </div>
-                <div class="form-group required">
-                  <div class="col-sm-12">
-                    <label class="control-label"><?php echo $entry_rating; ?></label>
-                    &nbsp;&nbsp;&nbsp; <?php echo $entry_bad; ?>&nbsp;
-                    <input type="radio" name="rating" value="1" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="2" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="3" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="4" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="5" />
-                    &nbsp;<?php echo $entry_good; ?></div>
-                </div>
+
                 <?php echo $captcha; ?>
                 <div class="buttons clearfix">
-                  <div class="pull-right">
-                    <button type="button" id="button-review" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_continue; ?></button>
+                  <div class="pull-center">
+                    <button type="button" id="button-review"
+                            data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary">
+                      <?php echo $button_continue; ?></button>
                   </div>
                 </div>
                 <?php } else { ?>
@@ -308,7 +313,11 @@
               <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
               <?php } ?>
               <?php } ?>
-              <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"><?php echo $reviews; ?></a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"><?php echo $text_write; ?></a></p>
+              <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">
+                <?php echo $reviews; ?></a> /
+              <a href="" onclick="showRewiewForm(); return false;">
+                <?php echo $text_write; ?></a>
+            </p>
             <hr>
           </div>
           <?php } ?>
@@ -450,10 +459,12 @@ $('#button-cart').on('click', function() {
 				$('.breadcrumb').after('<div class="alert alert-success">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
 				$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+				$('#cart2 > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
 
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 				$('#cart > ul').load('index.php?route=common/cart/info ul li');
+				$('#cart2 > ul').load('index.php?route=common/cart/info ul li');
 			}
 		},
         error: function(xhr, ajaxOptions, thrownError) {
@@ -557,11 +568,11 @@ $('#button-review').on('click', function() {
 			$('.alert-success, .alert-danger').remove();
 
 			if (json['error']) {
-				$('#review').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+				$('#form-review').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
 			}
 
 			if (json['success']) {
-				$('#review').after('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+                $('#form-review').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
 
 				$('input[name=\'name\']').val('');
 				$('textarea[name=\'text\']').val('');
@@ -580,5 +591,18 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function showRewiewForm() {
+  $.fancybox($("#form-review"))
+  // $(".fancybox-inner").css("overflow", "hidden")
+}
+
+
 //--></script>
 <?php echo $footer; ?>
+
+<style>
+  .form-horizontal .form-group{
+    margin-right: 0px;
+  }
+</style>

@@ -239,6 +239,7 @@ class ControllerProductProduct extends Controller {
 			$data['text_write'] = $this->language->get('text_write');
 			$data['text_login'] = sprintf($this->language->get('text_login'), $this->url->link('account/login', '', true), $this->url->link('account/register', '', true));
 			$data['text_note'] = $this->language->get('text_note');
+
 			$data['text_tags'] = $this->language->get('text_tags');
 			$data['text_related'] = $this->language->get('text_related');
 			$data['text_payment_recurring'] = $this->language->get('text_payment_recurring');
@@ -247,12 +248,19 @@ class ControllerProductProduct extends Controller {
 			$data['text_articul'] = $this->language->get('text_articul');
 			$data['text_pack'] = $this->language->get('text_pack');
 
+
 			$data['entry_qty'] = $this->language->get('entry_qty');
 			$data['entry_name'] = $this->language->get('entry_name');
 			$data['entry_review'] = $this->language->get('entry_review');
 			$data['entry_rating'] = $this->language->get('entry_rating');
 			$data['entry_good'] = $this->language->get('entry_good');
 			$data['entry_bad'] = $this->language->get('entry_bad');
+
+            $data['entry_goods'] = $this->language->get('entry_goods');
+            $data['entry_bads'] = $this->language->get('entry_bads');
+            $data['entry_email'] = $this->language->get('entry_email');
+            $data['entry_rew_add_txt'] = $this->language->get('text_rew_add_txt');
+
 
 			$data['button_cart'] = $this->language->get('button_cart');
 			$data['button_wishlist'] = $this->language->get('button_wishlist');
@@ -394,8 +402,10 @@ class ControllerProductProduct extends Controller {
 
 			if ($this->customer->isLogged()) {
 				$data['customer_name'] = $this->customer->getFirstName() . '&nbsp;' . $this->customer->getLastName();
+                $data['customer_email'] = $this->customer->getEmail();
 			} else {
 				$data['customer_name'] = '';
+				$data['customer_email'] = '';
 			}
 
 			$data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
@@ -589,6 +599,8 @@ class ControllerProductProduct extends Controller {
 			$data['reviews'][] = array(
 				'author'     => $result['author'],
 				'text'       => nl2br($result['text']),
+				'good'       => nl2br($result['good']),
+				'bad'       => nl2br($result['bad']),
 				'rating'     => (int)$result['rating'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
 			);
@@ -620,10 +632,16 @@ class ControllerProductProduct extends Controller {
 			if ((utf8_strlen($this->request->post['text']) < 25) || (utf8_strlen($this->request->post['text']) > 1000)) {
 				$json['error'] = $this->language->get('error_text');
 			}
+            if ((utf8_strlen($this->request->post['good']) < 10) || (utf8_strlen($this->request->post['good']) > 1000)) {
+                $json['error'] = $this->language->get('error_good');
+            }
+            if ((utf8_strlen($this->request->post['bad']) < 10) || (utf8_strlen($this->request->post['bad']) > 1000)) {
+                $json['error'] = $this->language->get('error_bad');
+            }
 
-			if (empty($this->request->post['rating']) || $this->request->post['rating'] < 0 || $this->request->post['rating'] > 5) {
-				$json['error'] = $this->language->get('error_rating');
-			}
+//			if (empty($this->request->post['rating']) || $this->request->post['rating'] < 0 || $this->request->post['rating'] > 5) {
+//				$json['error'] = $this->language->get('error_rating');
+//			}
 
 			// Captcha
 			if ($this->config->get($this->config->get('config_captcha') . '_status') && in_array('review', (array)$this->config->get('config_captcha_page'))) {

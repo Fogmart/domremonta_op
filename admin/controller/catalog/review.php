@@ -295,6 +295,9 @@ class ControllerCatalogReview extends Controller {
 		$data['entry_rating'] = $this->language->get('entry_rating');
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_date_added'] = $this->language->get('entry_date_added');
+        $data['entry_goods'] = $this->language->get('entry_goods');
+        $data['entry_bads'] = $this->language->get('entry_bads');
+        $data['entry_email'] = $this->language->get('entry_email');
 
 		$data['button_add'] = $this->language->get('button_add');
 		$data['button_edit'] = $this->language->get('button_edit');
@@ -421,6 +424,9 @@ class ControllerCatalogReview extends Controller {
 		$data['entry_date_added'] = $this->language->get('entry_date_added');
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_text'] = $this->language->get('entry_text');
+        $data['entry_goods'] = $this->language->get('entry_goods');
+        $data['entry_bads'] = $this->language->get('entry_bads');
+        $data['entry_email'] = $this->language->get('entry_email');
 
 		$data['help_product'] = $this->language->get('help_product');
 
@@ -450,12 +456,23 @@ class ControllerCatalogReview extends Controller {
 		} else {
 			$data['error_text'] = '';
 		}
-
-		if (isset($this->error['rating'])) {
-			$data['error_rating'] = $this->error['rating'];
+		if (isset($this->error['error_goods'])) {
+			$data['error_goods'] = $this->error['text'];
 		} else {
-			$data['error_rating'] = '';
+			$data['error_goods'] = '';
 		}
+		if (isset($this->error['text'])) {
+			$data['error_bads'] = $this->error['text'];
+		} else {
+			$data['error_bads'] = '';
+		}
+
+
+//		if (isset($this->error['rating'])) {
+//			$data['error_rating'] = $this->error['rating'];
+//		} else {
+//			$data['error_rating'] = '';
+//		}
 
 		$url = '';
 
@@ -538,6 +555,13 @@ class ControllerCatalogReview extends Controller {
 		} else {
 			$data['author'] = '';
 		}
+		if (isset($this->request->post['email'])) {
+			$data['email'] = $this->request->post['email'];
+		} elseif (!empty($review_info)) {
+			$data['email'] = $review_info['email'];
+		} else {
+			$data['email'] = '';
+		}
 
 		if (isset($this->request->post['text'])) {
 			$data['text'] = $this->request->post['text'];
@@ -546,6 +570,21 @@ class ControllerCatalogReview extends Controller {
 		} else {
 			$data['text'] = '';
 		}
+		if (isset($this->request->post['good'])) {
+			$data['good'] = $this->request->post['good'];
+		} elseif (!empty($review_info)) {
+			$data['good'] = $review_info['good'];
+		} else {
+			$data['good'] = '';
+		}
+		if (isset($this->request->post['bad'])) {
+			$data['bad'] = $this->request->post['bad'];
+		} elseif (!empty($review_info)) {
+			$data['bad'] = $review_info['bad'];
+		} else {
+			$data['bad'] = '';
+		}
+
 
 		if (isset($this->request->post['rating'])) {
 			$data['rating'] = $this->request->post['rating'];
@@ -595,9 +634,9 @@ class ControllerCatalogReview extends Controller {
 			$this->error['text'] = $this->language->get('error_text');
 		}
 
-		if (!isset($this->request->post['rating']) || $this->request->post['rating'] < 0 || $this->request->post['rating'] > 5) {
-			$this->error['rating'] = $this->language->get('error_rating');
-		}
+//		if (!isset($this->request->post['rating']) || $this->request->post['rating'] < 0 || $this->request->post['rating'] > 5) {
+//			$this->error['rating'] = $this->language->get('error_rating');
+//		}
 
 		return !$this->error;
 	}
