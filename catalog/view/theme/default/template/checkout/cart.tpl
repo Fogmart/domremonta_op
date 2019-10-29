@@ -39,17 +39,21 @@
           <table class="table table-bordered">
             <thead>
               <tr>
+                <td class="text-center">№</td>
                 <td class="text-center"><?php echo $column_image; ?></td>
                 <td class="text-left"><?php echo $column_name; ?></td>
-                <td class="text-left"><?php echo $column_model; ?></td>
-                <td class="text-left"><?php echo $column_quantity; ?></td>
+                <td class="text-left"><?php echo $column_articul; ?></td>
                 <td class="text-right"><?php echo $column_price; ?></td>
+                <td class="text-left"><?php echo $column_quantity; ?></td>
+                <td class="text-right"><?php echo $column_pack; ?></td>
                 <td class="text-right"><?php echo $column_total; ?></td>
+                <td class="text-right"><?php echo $column_weight; ?></td>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($products as $product) { ?>
+              <?php foreach ($products as $i=>$product) { ?>
               <tr>
+                <td class="text-center"><?=$i+1?></td>
                 <td class="text-center"><?php if ($product['thumb']) { ?>
                   <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-thumbnail" /></a>
                   <?php } ?></td>
@@ -71,15 +75,21 @@
                   <br />
                   <span class="label label-info"><?php echo $text_recurring_item; ?></span> <small><?php echo $product['recurring']; ?></small>
                   <?php } ?></td>
-                <td class="text-left"><?php echo $product['model']; ?></td>
+                <td class="text-left"><?php echo $product['articul']; ?></td>
+                <td class="text-right"><?php echo $product['price']; ?></td>
                 <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
                     <input type="text" name="quantity[<?php echo $product['cart_id']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" class="form-control" />
                     <span class="input-group-btn">
                     <button type="submit" data-toggle="tooltip" title="<?php echo $button_update; ?>" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
-                    <button type="button" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger" onclick="cart.remove('<?php echo $product['cart_id']; ?>');"><i class="fa fa-times-circle"></i></button>
-                    </span></div></td>
-                <td class="text-right"><?php echo $product['price']; ?></td>
+
+                    </span></div>
+                </td>
+                <td class="text-right"><?php echo $product['pack']; ?></td>
+
                 <td class="text-right"><?php echo $product['total']; ?></td>
+                <td class="text-right"><?php echo $product['weight']; ?>
+                  <button type="button" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger" onclick="cart.remove('<?php echo $product['cart_id']; ?>');"><i class="fa fa-times-circle"></i></button>
+                </td>
               </tr>
               <?php } ?>
               <?php foreach ($vouchers as $voucher) { ?>
@@ -101,8 +111,6 @@
         </div>
       </form>
       <?php if ($modules) { ?>
-      <h2><?php echo $text_next; ?></h2>
-      <p><?php echo $text_next_choice; ?></p>
       <div class="panel-group" id="accordion">
         <?php foreach ($modules as $module) { ?>
         <?php echo $module; ?>
@@ -119,14 +127,34 @@
               <td class="text-right"><?php echo $total['text']; ?></td>
             </tr>
             <?php } ?>
+            <tr>
+              <td colspan="2" class="text-right">
+                <input type="checkbox" id="aggree" onclick="updBtn()">
+                <label for="aggree"><?=$text_aggree?></label>
+              </td>
+
+            </tr>
           </table>
         </div>
       </div>
       <div class="buttons clearfix">
         <div class="pull-left"><a href="<?php echo $continue; ?>" class="btn btn-default"><?php echo $button_shopping; ?></a></div>
-        <div class="pull-right"><a href="<?php echo $checkout; ?>" class="btn btn-primary"><?php echo $button_checkout; ?></a></div>
+        <div class="pull-right">
+          <button onclick="document.location='<?php echo $checkout; ?>'"
+                  id="checkout"
+                  class="btn btn-primary"><?php echo $button_checkout; ?></button>
+        </div>
       </div>
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
 <?php echo $footer; ?>
+
+<script>
+  function updBtn() {
+    $("#checkout").prop("disabled", !$("#aggree").prop("checked"))
+  }
+  $(function () {
+    updBtn()
+  })
+</script>

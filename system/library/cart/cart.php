@@ -259,6 +259,8 @@ class Cart {
 					'width'           => $product_query->row['width'],
 					'height'          => $product_query->row['height'],
 					'length_class_id' => $product_query->row['length_class_id'],
+					'sku'             => $product_query->row['sku'],
+					'pack'             => $product_query->row['pack'],
 					'recurring'       => $recurring
 				);
 			} else {

@@ -25,14 +25,19 @@ $_['text_payment_recurring']                    = 'Платежный профи
 $_['text_trial_description'] 	              = 'Стоимость: %s; Периодичность: %d %s; Кол-во платежей: %d;  Далее,  ';
 $_['text_payment_description'] 	              = 'Стоимость: %s; Периодичность: %d %s; Кол-во платежей: %d';
 $_['text_payment_cancel']      = 'Стоимость: %s; Периодичность: %d %s; Кол-во платежей: до отмены';
+$_['text_aggree']      = 'Согласен с <a href="/index.php?route=information/information&information_id=17" target="_blank">торговыми условиями</a>';
 
 // Column
 $_['column_image']          = 'Изображение';
 $_['column_name']           = 'Название';
 $_['column_model']          = 'Модель';
+$_['column_articul']        = 'Артикул';
+$_['column_pack']           = 'Фасовка';
+$_['column_weight']         = 'Вес';
+
 $_['column_quantity']       = 'Количество';
-$_['column_price']          = 'Цена за шт.';
-$_['column_total']          = 'Всего';
+$_['column_price']          = 'Цена с НДС';
+$_['column_total']          = 'Сумма с НДС';
 
 // Error
 $_['error_stock']            = 'Товары отмеченные *** отсутствуют в нужном количестве или их нет на складе!';

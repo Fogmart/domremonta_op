@@ -23,6 +23,7 @@ class ControllerCheckoutCart extends Controller {
 			$data['text_recurring_item'] = $this->language->get('text_recurring_item');
 			$data['text_next'] = $this->language->get('text_next');
 			$data['text_next_choice'] = $this->language->get('text_next_choice');
+			$data['text_aggree'] = $this->language->get('text_aggree');
 
 			$data['column_image'] = $this->language->get('column_image');
 			$data['column_name'] = $this->language->get('column_name');
@@ -30,6 +31,9 @@ class ControllerCheckoutCart extends Controller {
 			$data['column_quantity'] = $this->language->get('column_quantity');
 			$data['column_price'] = $this->language->get('column_price');
 			$data['column_total'] = $this->language->get('column_total');
+			$data['column_articul'] = $this->language->get('column_articul');
+			$data['column_pack'] = $this->language->get('column_pack');
+			$data['column_weight'] = $this->language->get('column_weight');
 
 			$data['button_update'] = $this->language->get('button_update');
 			$data['button_remove'] = $this->language->get('button_remove');
@@ -125,7 +129,6 @@ class ControllerCheckoutCart extends Controller {
 					$price = false;
 					$total = false;
 				}
-
 				$recurring = '';
 
 				if ($product['recurring']) {
@@ -159,7 +162,10 @@ class ControllerCheckoutCart extends Controller {
 					'stock'     => $product['stock'] ? true : !(!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning')),
 					'reward'    => ($product['reward'] ? sprintf($this->language->get('text_points'), $product['reward']) : ''),
 					'price'     => $price,
+					'articul'   => $product['sku'],
+					'weight'   => $product['weight'] ,
 					'total'     => $total,
+					'pack'     => $product['pack'],
 					'href'      => $this->url->link('product/product', 'product_id=' . $product['product_id'])
 				);
 			}
@@ -239,7 +245,8 @@ class ControllerCheckoutCart extends Controller {
 
 			$data['modules'] = array();
 			
-			$files = glob(DIR_APPLICATION . '/controller/extension/total/*.php');
+//			$files = glob(DIR_APPLICATION . '/controller/extension/total/*.php');
+			$files = glob(DIR_APPLICATION . '/controller/extension/total/coupon.php');
 
 			if ($files) {
 				foreach ($files as $file) {
