@@ -22,6 +22,20 @@
         <fieldset>
           <legend><?php echo $text_your_details; ?></legend>
           <div class="form-group required">
+            <div class="col-sm-12" style="text-align: center;">
+              <input type="radio" name="isorg" id="isfl"  value="0"
+                <?php if (!$isorg) { ?>checked <?php } ?>
+                onChange="updOrgView()"
+              >
+              <label for="isfl"><?=$isfl?></label>
+              <input type="radio" name="isorg" id="isyl" value="1"
+                <?php if ($isorg) { ?>checked <?php } ?>
+                onChange="updOrgView()"
+              >
+              <label for="isyl"><?=$isyl?></label>
+            </div>
+          </div>
+          <div class="form-group required fl">
             <label class="col-sm-2 control-label" for="input-firstname"><?php echo $entry_firstname; ?> </label>
             <div class="col-sm-10">
               <input type="text" name="firstname" value="<?php echo $firstname; ?>" placeholder="<?php echo $entry_firstname; ?>" id="input-firstname" class="form-control" />
@@ -30,7 +44,7 @@
               <?php } ?>
             </div>
           </div>
-          <div class="form-group required">
+          <div class="form-group required fl">
             <label class="col-sm-2 control-label" for="input-lastname"><?php echo $entry_lastname; ?></label>
             <div class="col-sm-10">
               <input type="text" name="lastname" value="<?php echo $lastname; ?>" placeholder="<?php echo $entry_lastname; ?>" id="input-lastname" class="form-control" />
@@ -39,6 +53,88 @@
               <?php } ?>
             </div>
           </div>
+
+
+
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company"><?php echo $entry_company; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company" value="<?php echo $company; ?>"
+                     placeholder="<?php echo $entry_company; ?>" id="input-company" class="form-control" />
+              <?php if ($error_company) { ?>
+              <div class="text-danger"><?php echo $error_company; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company_inn"><?php echo $entry_company_inn; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company_inn" value="<?php echo $company_inn; ?>"
+                     placeholder="<?php echo $entry_company_inn; ?>" id="input-company_inn" class="form-control" />
+              <?php if ($error_company_inn) { ?>
+              <div class="text-danger"><?php echo $error_company_inn; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company_kpp"><?php echo $entry_company_kpp; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company_kpp" value="<?php echo $company_kpp; ?>"
+                     placeholder="<?php echo $entry_company_kpp; ?>" id="input-company_kpp" class="form-control" />
+              <?php if ($error_company_kpp) { ?>
+              <div class="text-danger"><?php echo $error_company_kpp; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company_bik"><?php echo $entry_company_bik; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company_bik" value="<?php echo $company_bik; ?>"
+                     placeholder="<?php echo $entry_company_bik; ?>" id="input-company_bik" class="form-control" />
+              <?php if ($error_company_bik) { ?>
+              <div class="text-danger"><?php echo $error_company_bik; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company_corr"><?php echo $entry_company_corr; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company_corr" value="<?php echo $company_corr; ?>"
+                     placeholder="<?php echo $entry_company_corr; ?>" id="input-company_corr" class="form-control" />
+              <?php if ($error_company_corr) { ?>
+              <div class="text-danger"><?php echo $error_company_corr; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company_rs"><?php echo $entry_company_rs; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company_rs" value="<?php echo $company_rs; ?>" placeholder="<?php echo $entry_company_rs; ?>" id="input-company_rs" class="form-control" />
+              <?php if ($error_company_rs) { ?>
+              <div class="text-danger"><?php echo $error_company_rs; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company_bank"><?php echo $entry_company_bank; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company_bank" value="<?php echo $company_bank; ?>" placeholder="<?php echo $entry_company_bank; ?>" id="input-company_bank" class="form-control" />
+              <?php if ($error_company_bank) { ?>
+              <div class="text-danger"><?php echo $error_company_bank; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required yl">
+            <label class="col-sm-2 control-label" for="input-company_agent"><?php echo $entry_company_agent; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="company_agent" value="<?php echo $company_agent; ?>" placeholder="<?php echo $entry_company_agent; ?>" id="input-company_agent" class="form-control" />
+              <?php if ($error_company_agent) { ?>
+              <div class="text-danger"><?php echo $error_company_agent; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+
+
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
             <div class="col-sm-10">
@@ -307,5 +403,17 @@ $('.datetime').datetimepicker({
 $('.time').datetimepicker({
 	pickDate: false
 });
+  updOrgView()
+
+function updOrgView() {
+  if ($("[name=isorg]:checked").val() == "1"){
+    $(".fl").hide()
+    $(".yl").show()
+  } else {
+    $(".yl").hide()
+    $(".fl").show()
+  }
+}
+
 //--></script>
 <?php echo $footer; ?>

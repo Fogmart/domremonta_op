@@ -1,11 +1,15 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://op.loc/admin/');
-define('HTTP_CATALOG', 'http://op.loc/');
+//define('HTTP_SERVER', 'http://op.loc/admin/');
+define('HTTP_SERVER', 'http://test.alevd.online/admin/');
+define('HTTP_CATALOG', 'http://test.alevd.online/');
+//define('HTTP_CATALOG', 'http://op.loc/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://op.loc/admin/');
-define('HTTPS_CATALOG', 'http://op.loc/');
+//define('HTTPS_SERVER', 'http://op.loc/admin/');
+define('HTTPS_SERVER', 'http://test.alevd.online/admin/');
+//define('HTTPS_CATALOG', 'http://op.loc/');
+define('HTTPS_CATALOG', 'http://test.alevd.online/');
 
 // DIR
 define('DIR_APPLICATION', 'D:/proj/opencart2/admin/');
@@ -23,7 +27,7 @@ define('DIR_CATALOG', 'D:/proj/opencart2/catalog/');
 
 // DB
 define('DB_DRIVER', 'mysqli');
-define('DB_HOSTNAME', 'localhost');
+define('DB_HOSTNAME', '192.168.1.4');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_DATABASE', 'op');

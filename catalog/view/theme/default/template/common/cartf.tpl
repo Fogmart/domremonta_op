@@ -1,4 +1,4 @@
-<div id="cart" >
+<div id="cart2" >
   <button type="button" data-toggle="dropdown" data-loading-text="<?php echo $text_loading; ?>"
           onclick="document.location='<?=$cart?>'"
   >

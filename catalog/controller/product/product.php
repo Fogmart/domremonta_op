@@ -243,6 +243,8 @@ class ControllerProductProduct extends Controller {
 			$data['text_related'] = $this->language->get('text_related');
 			$data['text_payment_recurring'] = $this->language->get('text_payment_recurring');
 			$data['text_loading'] = $this->language->get('text_loading');
+			$data['text_product_id'] = $this->language->get('text_product_id');
+			$data['text_articul'] = $this->language->get('text_articul');
 
 			$data['entry_qty'] = $this->language->get('entry_qty');
 			$data['entry_name'] = $this->language->get('entry_name');
@@ -266,6 +268,10 @@ class ControllerProductProduct extends Controller {
 			$data['product_id'] = (int)$this->request->get['product_id'];
 			$data['manufacturer'] = $product_info['manufacturer'];
 			$data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
+
+            $data['product_id'] = $product_id;
+            $data['articul'] = $product_info['sku'];
+
 			$data['model'] = $product_info['model'];
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
@@ -310,8 +316,8 @@ class ControllerProductProduct extends Controller {
 				$data['price'] = false;
 			}
 
-			if ((float)$product_info['special']) {
-				$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+			if ((float)$product_info['oldprice']) {
+				$data['special'] = $this->currency->format($this->tax->calculate($product_info['oldprice'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 			} else {
 				$data['special'] = false;
 			}
@@ -419,8 +425,8 @@ class ControllerProductProduct extends Controller {
 					$price = false;
 				}
 
-				if ((float)$result['special']) {
-					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				if ((float)$result['oldprice']) {
+					$special = $this->currency->format($this->tax->calculate($result['oldprice'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 				} else {
 					$special = false;
 				}

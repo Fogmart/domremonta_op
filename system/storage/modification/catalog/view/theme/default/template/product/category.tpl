@@ -61,9 +61,7 @@
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
-          <div class="form-group">
-            <a href="<?php echo $compare; ?>" id="compare-total" class="btn btn-link"><?php echo $text_compare; ?></a>
-          </div>
+
         </div>
         <div class="col-md-4 col-xs-6">
           <div class="form-group input-group input-group-sm">
@@ -97,6 +95,13 @@
       <div class="row">
         <?php foreach ($products as $product) { ?>
         <div class="product-layout product-list col-xs-12">
+
+			<div class="box-label">			
+			<?php if ($product['jan']) { ?><div class="label-product label_sale"><span><?php echo $product['jan']; ?></span></div><?php } ?>
+			<?php if ($product['isbn']) { ?><div class="label-product label_new"><span><?php echo $product['isbn']; ?></span></div><?php } ?>
+			<?php if ($product['mpn']) { ?><div class="label-product label_hit"><span><?php echo $product['mpn']; ?></span></div><?php } ?>	
+			</div>			
+			
           <div class="product-thumb">
 
 				<div id="<?php echo $product['product_id']; ?>" class="modal fade">
@@ -195,13 +200,15 @@
             <div>
               <div class="caption">
                 <h4><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
-                <p><?php echo $product['description']; ?></p>
+                <!-- <p><?php echo $product['description']; ?></p> -->
+                <p>Артикул: <?php echo $product['articul']; ?></p>
                 <?php if ($product['price']) { ?>
                 <p class="price">
                   <?php if (!$product['special']) { ?>
                   <?php echo $product['price']; ?>
                   <?php } else { ?>
-                  <span class="price-new"><?php echo $product['special']; ?></span> <span class="price-old"><?php echo $product['price']; ?></span>
+                  <span class="price-new"><?php echo $product['price']; ?></span>
+                  <span class="price-old"><?php echo $product['special']; ?></span>
                   <?php } ?>
                   <?php if ($product['tax']) { ?>
                   <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>

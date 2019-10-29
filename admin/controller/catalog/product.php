@@ -579,6 +579,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_quantity'] = $this->language->get('entry_quantity');
 		$data['entry_stock_status'] = $this->language->get('entry_stock_status');
 		$data['entry_price'] = $this->language->get('entry_price');
+		$data['entry_oldprice'] = $this->language->get('entry_oldprice');
 		$data['entry_tax_class'] = $this->language->get('entry_tax_class');
 		$data['entry_points'] = $this->language->get('entry_points');
 		$data['entry_option_points'] = $this->language->get('entry_option_points');
@@ -855,6 +856,13 @@ class ControllerCatalogProduct extends Controller {
 			$data['price'] = $product_info['price'];
 		} else {
 			$data['price'] = '';
+		}
+		if (isset($this->request->post['oldprice'])) {
+			$data['oldprice'] = $this->request->post['oldprice'];
+		} elseif (!empty($product_info)) {
+			$data['oldprice'] = $product_info['oldprice'];
+		} else {
+			$data['oldprice'] = '';
 		}
 
 		$this->load->model('catalog/recurring');
@@ -1331,14 +1339,14 @@ class ControllerCatalogProduct extends Controller {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 
-			if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
-				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
-			}
+//			if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
+//				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
+//			}
 		}
 
-		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
-			$this->error['model'] = $this->language->get('error_model');
-		}
+//		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
+//			$this->error['model'] = $this->language->get('error_model');
+//		}
 
 		if (utf8_strlen($this->request->post['keyword']) > 0) {
 			$this->load->model('catalog/url_alias');

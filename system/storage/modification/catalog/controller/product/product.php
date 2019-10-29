@@ -243,6 +243,8 @@ class ControllerProductProduct extends Controller {
 			$data['text_related'] = $this->language->get('text_related');
 			$data['text_payment_recurring'] = $this->language->get('text_payment_recurring');
 			$data['text_loading'] = $this->language->get('text_loading');
+			$data['text_product_id'] = $this->language->get('text_product_id');
+			$data['text_articul'] = $this->language->get('text_articul');
 
 			$data['entry_qty'] = $this->language->get('entry_qty');
 			$data['entry_name'] = $this->language->get('entry_name');
@@ -266,109 +268,19 @@ class ControllerProductProduct extends Controller {
 			$data['product_id'] = (int)$this->request->get['product_id'];
 			$data['manufacturer'] = $product_info['manufacturer'];
 			$data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
+
+            $data['product_id'] = $product_id;
+            $data['articul'] = $product_info['sku'];
+
 			$data['model'] = $product_info['model'];
+
+$data['jan'] = $product_info['jan'];
+$data['isbn'] = $product_info['isbn'];
+$data['mpn'] = $product_info['mpn'];
+			
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
-
-			// +++ TESLA-CHITA
-			$product_id = (int)$this->request->get['product_id'];
-			// Характеристики
-			$product_option_values = array();
-			$sql = "SELECT `pfv`.`product_feature_id`, `pov`.`product_option_id`, `pfv`.`product_option_value_id` FROM `" . DB_PREFIX . "product_feature_value` `pfv` LEFT JOIN `" . DB_PREFIX . "product_option_value` `pov` ON (`pfv`.`product_option_value_id` = `pov`.`product_option_value_id`) LEFT JOIN `" . DB_PREFIX . "option` `o` ON (`pov`.`option_id` = `o`.`option_id`) WHERE `pfv`.`product_id` = " . $this->request->get['product_id'] . " ORDER BY `o`.`sort_order`";
-			$query = $this->db->query($sql);
-			$features = $query->rows;
-			foreach ($features as $feature_value) {
-				if (empty($product_option_values[$feature_value['product_option_value_id']])) {
-					$product_option_values[$feature_value['product_option_value_id']] = array();
-				}
-       			foreach ($features as $feature_value1) {
-       				if ($feature_value1['product_feature_id'] == $feature_value['product_feature_id'] && $feature_value1['product_option_value_id'] <> $feature_value['product_option_value_id']) {
-
-       					$product_option_values[$feature_value['product_option_value_id']][] = $feature_value1['product_option_value_id'];
-       				}
-				}
-
-	        }
-        	unset($query);
-
-			$customer_group_id = $this->customer->isLogged()? $this->customer->getGroupId() : $this->config->get('config_customer_group_id');
-			$product_features_price = array();
-			$query = $this->db->query("SELECT `product_feature_id`, `price`, `unit_id` FROM `" . DB_PREFIX . "product_price` WHERE `product_id` = " . (int)$this->request->get['product_id'] . " AND `customer_group_id` = " . $customer_group_id);
-			$data['currency_data'] = array(
-				'symbol'  => $this->currency->getSymbolRight($this->session->data['currency']),
-				'decimal' => $this->currency->getDecimalPlace($this->session->data['currency']),
-				'value'	  => $this->currency->getValue($this->session->data['currency'])
-			);
-			$product_features_price = array();
-			$product_features_options = array();
-			$product_features_options_values = array();
-			foreach ($query->rows as $query_price) {
-				$product_features_price[$query_price['product_feature_id']] = array(
-					'value' => $query_price['price'] * $data['currency_data']['value'],
-					'tax'	=> $this->tax->calculate($query_price['price'], $product_info['tax_class_id'], $this->config->get('config_tax')) * $data['currency_data']['value'],
-					'unit'	=> $query_price['unit_id']
-				);
-				foreach ($features as $feature) {
-					if ($feature['product_feature_id'] == $query_price['product_feature_id']) {
-						if (!isset($product_features_options[$feature['product_feature_id']])) {
-							$product_features_options[$feature['product_feature_id']] = array();
-						}
-						$product_features_options[$feature['product_feature_id']][$feature['product_option_id']] = $feature['product_option_value_id'];
-						$product_features_options_values[$feature['product_option_value_id']] = $feature['product_feature_id'];
-					}
-				}
-			}
-			$data['product_features_price'] = $product_features_price;
-			$data['product_features_options'] = $product_features_options;
-			$data['product_features_options_values'] = $product_features_options_values;
-
-			// Остатки в базовой единице
-			$product_quantity = array();
-			$product_units = array();
-			$quantity_total = 0;
-			if ($this->config->get('config_stock_display') && !empty($product_features_options)) {
-
-				$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "product_quantity` WHERE `product_id` = " . (int)$this->request->get['product_id']);
-				foreach ($query->rows as $query_quantity) {
-
-					if (!isset($product_quantity[$query_quantity['product_feature_id']])) {
-						$product_quantity[$query_quantity['product_feature_id']] = array();
-					}
-					$quantity = &$product_quantity[$query_quantity['product_feature_id']];
-
-					if (!isset($quantity[$query_quantity['warehouse_id']])) {
-						$quantity[$query_quantity['warehouse_id']] = $query_quantity['quantity'];
-						$quantity_total += $query_quantity['quantity'];
-					}
-
-					$query = $this->db->query("SELECT `u`.`name`, `u`.`full_name`, `pu`.`ratio`, `pu`.`product_feature_id`, `u`.`unit_id` FROM `" . DB_PREFIX . "product_unit` `pu` LEFT JOIN `" . DB_PREFIX . "unit_to_1c` `u` ON (`pu`.`unit_id` = `u`.`unit_id`) WHERE `pu`.`product_id` = " . $product_id);
-					if ($query->num_rows) {
-						foreach ($query->rows as $row) {
-							if (isset($product_units[$row['unit_id']]))
-								continue;
-							$product_units[$row['unit_id']] = array(
-								'full_name'				=> $row['full_name'],
-								'name'					=> $row['name'],
-								'ratio'					=> $row['ratio'],
-								'product_feature_id'	=> $row['product_feature_id']
-						  );
-						}
-					}
-				}
-			}
-			$product_quantity[0] = $quantity_total;
-			$data['product_quantity'] = $product_quantity;
-			$data['product_units'] = $product_units;
-
-			// Список складов
-			$sql = "SELECT * FROM `" . DB_PREFIX . "warehouse`";
-			$query = $this->db->query($sql);
-			$data['warehouses'] = array();
-			foreach ($query->rows as $query_warehouse) {
-				$data['warehouses'][$query_warehouse['warehouse_id']] = $query_warehouse['name'];
-			}
-			// --- TESLA-CHITA
 
 			if ($product_info['quantity'] <= 0) {
 				$data['stock'] = $product_info['stock_status'];
@@ -409,8 +321,8 @@ class ControllerProductProduct extends Controller {
 				$data['price'] = false;
 			}
 
-			if ((float)$product_info['special']) {
-				$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+			if ((float)$product_info['oldprice']) {
+				$data['special'] = $this->currency->format($this->tax->calculate($product_info['oldprice'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 			} else {
 				$data['special'] = false;
 			}
@@ -445,24 +357,8 @@ class ControllerProductProduct extends Controller {
 							$price = false;
 						}
 
-						// +++ TESLA-CHITA
-						$class = "";
-						foreach ($product_option_values[$option_value['product_option_value_id']] as $value) {
-							if (empty($class)) {
-								$class = $value;
-							} else {
-								$class .= " " . $value;
-							}
-						}
-						// --- TESLA-CHITA
-
-
 						$product_option_value_data[] = array(
 							'product_option_value_id' => $option_value['product_option_value_id'],
-							// +++ TESLA-CHITA
-							'price_prefix'            => $option_value['price_prefix'],
-							'class'                   => $class,
-							// --- TESLA-CHITA
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
 							'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
@@ -534,8 +430,8 @@ class ControllerProductProduct extends Controller {
 					$price = false;
 				}
 
-				if ((float)$result['special']) {
-					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				if ((float)$result['oldprice']) {
+					$special = $this->currency->format($this->tax->calculate($result['oldprice'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 				} else {
 					$special = false;
 				}
@@ -553,6 +449,11 @@ class ControllerProductProduct extends Controller {
 				}
 
 				$data['products'][] = array(
+
+					'isbn'           => $result['isbn'],
+					'mpn'           => $result['mpn'],
+					'jan'           => $result['jan'],
+			
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],

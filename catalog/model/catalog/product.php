@@ -30,6 +30,7 @@ class ModelCatalogProduct extends Model {
 				'manufacturer_id'  => $query->row['manufacturer_id'],
 				'manufacturer'     => $query->row['manufacturer'],
 				'price'            => ($query->row['discount'] ? $query->row['discount'] : $query->row['price']),
+				'oldprice'         => $query->row['oldprice'],
 				'special'          => $query->row['special'],
 				'reward'           => $query->row['reward'],
 				'points'           => $query->row['points'],
@@ -74,8 +75,15 @@ class ModelCatalogProduct extends Model {
 		} else {
 			$sql .= " FROM " . DB_PREFIX . "product p";
 		}
+        if (!empty($data['prcmin'])) {
+            $sql .= " JOIN " . DB_PREFIX . "product_discount pfmin ON (p2c.product_id = pfmin.product_id and pfmin.price >= '".(float)$data['prcmin']."' ) ";
+        }
+        if (!empty($data['prcmax'])) {
+            $sql .= "  JOIN " . DB_PREFIX . "product_discount pfmax ON (p2c.product_id = pfmax.product_id and pfmax.price <= '".(float)$data['prcmax']."' ) ";
+        }
 
 		$sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
+
 
 		if (!empty($data['filter_category_id'])) {
 			if (!empty($data['filter_sub_category'])) {

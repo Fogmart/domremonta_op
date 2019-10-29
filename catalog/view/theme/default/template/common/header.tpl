@@ -108,6 +108,11 @@
 
   </div>
 
+  <div id="fixedfooter">
+    <div > <button id="foorer_feedback">Обратная связь</button> </div>
+    <div ><button id="foorer_subscr">Подписка</button> </div>
+    <div id="footercart"><?=$cart_f?></div>
+  </div>
 
 </header>
 <?php if ($categories) { ?>
@@ -142,11 +147,7 @@
   </nav>
 </div>
 
-<div id="fixedfooter">
-  <div > <button id="foorer_feedback">Обратная связь</button> </div>
-  <div ><button id="foorer_subscr">Подписка</button> </div>
-  <div id="footercart"><?=$cart_f?></div>
-</div>
+
 
 <div class="floating-form" id="subscr">
   <div class="floating-form-heading">Подписка на рассылку</div>

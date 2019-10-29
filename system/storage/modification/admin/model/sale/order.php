@@ -93,13 +93,6 @@ class ModelSaleOrder extends Model {
 
 			return array(
 				'order_id'                => $order_query->row['order_id'],
-				// +++ TESLA-CHITA
-				'payment_inn'             => isset($order_query->row['payment_inn']) ? $order_query->row['payment_inn'] : "",
-				'shipping_kpp'            => isset($order_query->row['shipping_inn']) ? $order_query->row['shipping_inn'] : "",
-				'patronymic'              => isset($order_query->row['patronymic']) ? $order_query->row['patronymic'] : "",
-				'payment_patronymic'      => isset($order_query->row['payment_patronymic']) ? $order_query->row['payment_patronymic'] : "",
-				'shipping_patronymic'     => isset($order_query->row['shipping_patronymic']) ? $order_query->row['shipping_patronymic'] : "",
-				// --- TESLA-CHITA
 				'invoice_no'              => $order_query->row['invoice_no'],
 				'invoice_prefix'          => $order_query->row['invoice_prefix'],
 				'store_id'                => $order_query->row['store_id'],
@@ -110,6 +103,7 @@ class ModelSaleOrder extends Model {
 				'customer_group_id'       => $order_query->row['customer_group_id'],
 				'firstname'               => $order_query->row['firstname'],
 				'lastname'                => $order_query->row['lastname'],
+				'middlename'              => $order_query->row['middlename'],
 				'email'                   => $order_query->row['email'],
 				'telephone'               => $order_query->row['telephone'],
 				'fax'                     => $order_query->row['fax'],

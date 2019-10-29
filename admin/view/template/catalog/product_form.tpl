@@ -153,6 +153,12 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-oldprice"><?php echo $entry_oldprice; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="oldprice" value="<?php echo $oldprice; ?>" placeholder="<?php echo $entry_oldprice; ?>" id="input-oldprice" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-tax-class"><?php echo $entry_tax_class; ?></label>
                 <div class="col-sm-10">
                   <select name="tax_class_id" id="input-tax-class" class="form-control">

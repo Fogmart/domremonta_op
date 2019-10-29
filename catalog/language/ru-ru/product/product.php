@@ -30,6 +30,8 @@ $_['text_week']                               = 'недели';
 $_['text_semi_month']                         = 'полмесяца';
 $_['text_month']                              = 'месяц';
 $_['text_year']                               = 'год';
+$_['text_product_id']                         = 'Код';
+$_['text_articul']                            = 'Артикул производителя';
 
 // Entry
 $_['entry_qty']                               = 'Количество';

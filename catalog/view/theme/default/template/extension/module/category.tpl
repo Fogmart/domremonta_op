@@ -1,4 +1,12 @@
-<div class="list-group">
+<div class="list-group-item" >
+  <b>Категории</b>
+  <i class="fa fa-eye-slash" aria-hidden="true"
+     style="cursor: pointer"
+     onclick="$('.cats').slideToggle()"></i>
+
+</div>
+
+<div class="list-group cats">
   <?php foreach ($categories as $category) { ?>
   <?php if ($category['category_id'] == $category_id) { ?>
   <a href="<?php echo $category['href']; ?>" class="list-group-item active"><?php echo $category['name']; ?></a>
@@ -15,4 +23,5 @@
   <a href="<?php echo $category['href']; ?>" class="list-group-item"><?php echo $category['name']; ?></a>
   <?php } ?>
   <?php } ?>
+
 </div>

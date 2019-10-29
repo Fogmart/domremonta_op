@@ -258,6 +258,11 @@ class ControllerProductManufacturer extends Controller {
 				'discounts'   => $discounts,
 				'catdescription'  => html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'),
 				
+
+					'isbn'           => $result['isbn'],
+					'mpn'           => $result['mpn'],
+					'jan'           => $result['jan'],
+			
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],

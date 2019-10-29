@@ -42,6 +42,17 @@ class ControllerExtensionModuleFilter extends Controller {
 				$data['filter_category'] = array();
 			}
 
+            if (isset($this->request->get['prcmin'])) {
+                $data['prcmin'] =  $this->request->get['prcmin'];
+            } else {
+                $data['prcmin'] = "";
+            }
+            if (isset($this->request->get['prcmax'])) {
+                $data['prcmax'] =  $this->request->get['prcmax'];
+            } else {
+                $data['prcmax'] = "";
+            }
+
 			$this->load->model('catalog/product');
 
 			$data['filter_groups'] = array();

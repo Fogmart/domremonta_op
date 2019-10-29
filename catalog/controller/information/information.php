@@ -24,6 +24,7 @@ class ControllerInformationInformation extends Controller {
 			$this->document->setTitle($information_info['meta_title']);
 			$this->document->setDescription($information_info['meta_description']);
 			$this->document->setKeywords($information_info['meta_keyword']);
+            $data['information_id'] = $information_id;
 
 			$data['breadcrumbs'][] = array(
 				'text' => $information_info['title'],
@@ -31,6 +32,7 @@ class ControllerInformationInformation extends Controller {
 			);
 
 			$data['heading_title'] = $information_info['title'];
+
 
 			$data['button_continue'] = $this->language->get('button_continue');
 

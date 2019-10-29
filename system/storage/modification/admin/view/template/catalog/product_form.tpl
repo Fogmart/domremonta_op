@@ -136,19 +136,25 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-jan"><span data-toggle="tooltip" title="<?php echo $help_jan; ?>"><?php echo $entry_jan; ?></span></label>
                 <div class="col-sm-10">
-                  <input type="text" name="jan" value="<?php echo $jan; ?>" placeholder="<?php echo $entry_jan; ?>" id="input-jan" class="form-control" />
+                  <input type="text" name="jan" value="<?php echo $jan; ?>" 
+				placeholder="Введите текст бирки..."
+			 id="input-jan" class="form-control" />
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-isbn"><span data-toggle="tooltip" title="<?php echo $help_isbn; ?>"><?php echo $entry_isbn; ?></span></label>
                 <div class="col-sm-10">
-                  <input type="text" name="isbn" value="<?php echo $isbn; ?>" placeholder="<?php echo $entry_isbn; ?>" id="input-isbn" class="form-control" />
+                  <input type="text" name="isbn" value="<?php echo $isbn; ?>" 
+				placeholder="Введите текст бирки..."
+			 id="input-isbn" class="form-control" />
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-mpn"><span data-toggle="tooltip" title="<?php echo $help_mpn; ?>"><?php echo $entry_mpn; ?></span></label>
                 <div class="col-sm-10">
-                  <input type="text" name="mpn" value="<?php echo $mpn; ?>" placeholder="<?php echo $entry_mpn; ?>" id="input-mpn" class="form-control" />
+                  <input type="text" name="mpn" value="<?php echo $mpn; ?>" 
+				placeholder="Введите текст бирки..."
+			 id="input-mpn" class="form-control" />
                 </div>
               </div>
 
@@ -164,6 +170,12 @@
                 <label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
                 <div class="col-sm-10">
                   <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-oldprice"><?php echo $entry_oldprice; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="oldprice" value="<?php echo $oldprice; ?>" placeholder="<?php echo $entry_oldprice; ?>" id="input-oldprice" class="form-control" />
                 </div>
               </div>
               <div class="form-group">

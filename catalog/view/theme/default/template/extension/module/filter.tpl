@@ -1,6 +1,14 @@
 <div class="panel panel-default">
   <div class="panel-heading"><?php echo $heading_title; ?></div>
   <div class="list-group">
+    <a class="list-group-item">Цена</a>
+    <div class="list-group-item">
+      <div >
+        от <input name="prcmin" type="text" class="prcfilter" value="<?=$prcmin?>">
+        до <input name="prcmax" type="text" class="prcfilter" value="<?=$prcmax?>">
+      </div>
+    </div>
+
     <?php foreach ($filter_groups as $filter_group) { ?>
     <a class="list-group-item"><?php echo $filter_group['name']; ?></a>
     <div class="list-group-item">
@@ -34,6 +42,14 @@ $('#button-filter').on('click', function() {
 		filter.push(this.value);
 	});
 
-	location = '<?php echo $action; ?>&filter=' + filter.join(',');
+	location = '<?php echo $action; ?>&filter=' + filter.join(',')
+            +"&prcmin="+$('input[name^=\'prcmin\']').val()
+            +"&prcmax="+$('input[name^=\'prcmax\']').val();
 });
 //--></script>
+
+<style>
+  .prcfilter{
+    width: 40%;
+  }
+</style>

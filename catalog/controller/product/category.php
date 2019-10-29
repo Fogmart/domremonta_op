@@ -1,6 +1,7 @@
 <?php
 class ControllerProductCategory extends Controller {
 	public function index() {
+
 		$this->load->language('product/category');
 
 		$this->load->model('catalog/category');
@@ -10,10 +11,21 @@ class ControllerProductCategory extends Controller {
 		$this->load->model('tool/image');
 
 		if (isset($this->request->get['filter'])) {
-			$filter = $this->request->get['filter'];
-		} else {
-			$filter = '';
-		}
+            $filter = $this->request->get['filter'];
+        } else {
+            $filter = '';
+        }
+
+        if (isset($this->request->get['prcmin'])) {
+            $prcmin = $this->request->get['prcmin'];
+        } else {
+            $prcmin = '';
+        }
+        if (isset($this->request->get['prcmax'])) {
+            $prcmax = $this->request->get['prcmax'];
+        } else {
+            $prcmax = '';
+        }
 
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
@@ -147,6 +159,13 @@ class ControllerProductCategory extends Controller {
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
+			if (isset($this->request->get['prcmin'])) {
+				$url .= '&prcmin=' . $this->request->get['prcmin'];
+			}
+			if (isset($this->request->get['prcmax'])) {
+				$url .= '&prcmax=' . $this->request->get['prcmax'];
+			}
+
 
 			$data['categories'] = array();
 
@@ -172,14 +191,19 @@ class ControllerProductCategory extends Controller {
 				'sort'               => $sort,
 				'order'              => $order,
 				'start'              => ($page - 1) * $limit,
-				'limit'              => $limit
+				'limit'              => $limit,
+				'prcmin'             => $prcmin,
+				'prcmax'             => $prcmax,
 			);
+
+
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
 
 			foreach ($results as $result) {
+
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get($this->config->get('config_theme') . '_image_product_width'), $this->config->get($this->config->get('config_theme') . '_image_product_height'));
 				} else {
@@ -192,8 +216,8 @@ class ControllerProductCategory extends Controller {
 					$price = false;
 				}
 
-				if ((float)$result['special']) {
-					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				if ((float)$result['oldprice']) {
+					$special = $this->currency->format($this->tax->calculate($result['oldprice'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 				} else {
 					$special = false;
 				}
@@ -216,6 +240,8 @@ class ControllerProductCategory extends Controller {
 					'name'        => $result['name'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
+					'articul'     => $result['sku'],
+					'oldprice'     => $result['oldprice'],
 					'special'     => $special,
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
@@ -233,6 +259,12 @@ class ControllerProductCategory extends Controller {
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
+            if (isset($this->request->get['prcmin'])) {
+                $url .= '&prcmin=' . $this->request->get['prcmin'];
+            }
+            if (isset($this->request->get['prcmax'])) {
+                $url .= '&prcmax=' . $this->request->get['prcmax'];
+            }
 
 			$data['sorts'] = array();
 
@@ -242,17 +274,31 @@ class ControllerProductCategory extends Controller {
 				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=ASC' . $url)
 			);
 
-			$data['sorts'][] = array(
-				'text'  => $this->language->get('text_name_asc'),
-				'value' => 'pd.name-ASC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=ASC' . $url)
-			);
+//			$data['sorts'][] = array(
+//				'text'  => $this->language->get('text_name_asc'),
+//				'value' => 'pd.name-ASC',
+//				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=ASC' . $url)
+//			);
 
-			$data['sorts'][] = array(
-				'text'  => $this->language->get('text_name_desc'),
-				'value' => 'pd.name-DESC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)
-			);
+//			$data['sorts'][] = array(
+//				'text'  => $this->language->get('text_name_desc'),
+//				'value' => 'pd.name-DESC',
+//				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)
+//			);
+
+            if ($this->config->get('config_review_status')) {
+                $data['sorts'][] = array(
+                    'text'  => $this->language->get('text_rating_desc'),
+                    'value' => 'rating-DESC',
+                    'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
+                );
+
+                $data['sorts'][] = array(
+                    'text'  => $this->language->get('text_rating_asc'),
+                    'value' => 'rating-ASC',
+                    'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
+                );
+            }
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_price_asc'),
@@ -266,31 +312,19 @@ class ControllerProductCategory extends Controller {
 				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)
 			);
 
-			if ($this->config->get('config_review_status')) {
-				$data['sorts'][] = array(
-					'text'  => $this->language->get('text_rating_desc'),
-					'value' => 'rating-DESC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
-				);
 
-				$data['sorts'][] = array(
-					'text'  => $this->language->get('text_rating_asc'),
-					'value' => 'rating-ASC',
-					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
-				);
-			}
 
-			$data['sorts'][] = array(
-				'text'  => $this->language->get('text_model_asc'),
-				'value' => 'p.model-ASC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)
-			);
+//			$data['sorts'][] = array(
+//				'text'  => $this->language->get('text_model_asc'),
+//				'value' => 'p.model-ASC',
+//				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)
+//			);
 
-			$data['sorts'][] = array(
-				'text'  => $this->language->get('text_model_desc'),
-				'value' => 'p.model-DESC',
-				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
-			);
+//			$data['sorts'][] = array(
+//				'text'  => $this->language->get('text_model_desc'),
+//				'value' => 'p.model-DESC',
+//				'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
+//			);
 
 			$url = '';
 
@@ -308,7 +342,7 @@ class ControllerProductCategory extends Controller {
 
 			$data['limits'] = array();
 
-			$limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+            $limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 24, 36));
 
 			sort($limits);
 
@@ -336,6 +370,12 @@ class ControllerProductCategory extends Controller {
 
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
+			}
+			if (isset($this->request->get['prcmin'])) {
+				$url .= '&prcmin=' . $this->request->get['prcmin'];
+			}
+			if (isset($this->request->get['prcmax'])) {
+				$url .= '&prcmax=' . $this->request->get['prcmax'];
 			}
 
 			$pagination = new Pagination();
@@ -425,6 +465,7 @@ class ControllerProductCategory extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
+
 
 			$this->response->setOutput($this->load->view('error/not_found', $data));
 		}

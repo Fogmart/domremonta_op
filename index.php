@@ -13,6 +13,8 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
+//if (file_exists($li = DIR_APPLICATION.'/controller/extension/lightning/gamma.php')) require_once($li); //Lightning
+
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 

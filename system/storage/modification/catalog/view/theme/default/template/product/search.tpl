@@ -112,6 +112,13 @@
       <div class="row">
         <?php foreach ($products as $product) { ?>
         <div class="product-layout product-list col-xs-12">
+
+			<div class="box-label">			
+			<?php if ($product['jan']) { ?><div class="label-product label_sale"><span><?php echo $product['jan']; ?></span></div><?php } ?>
+			<?php if ($product['isbn']) { ?><div class="label-product label_new"><span><?php echo $product['isbn']; ?></span></div><?php } ?>
+			<?php if ($product['mpn']) { ?><div class="label-product label_hit"><span><?php echo $product['mpn']; ?></span></div><?php } ?>	
+			</div>			
+			
           <div class="product-thumb">
 
 				<div id="<?php echo $product['product_id']; ?>" class="modal fade">
