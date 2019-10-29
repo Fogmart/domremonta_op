@@ -26,13 +26,51 @@ class ModelExtensionShippingItem extends Model {
 
 			$quote_data = array();
 
-			$quote_data['item'] = array(
-				'code'         => 'item.item',
-				'title'        => $this->language->get('text_description'),
-				'cost'         => $this->config->get('item_cost') * $items,
-				'tax_class_id' => $this->config->get('item_tax_class_id'),
-				'text'         => $this->currency->format($this->tax->calculate($this->config->get('item_cost') * $items, $this->config->get('item_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-			);
+
+            $quote_data['self'] = array(
+                'code'         => 'item.self',
+                'title'        => "Самовывоз",
+                'cost'         => 0,
+                'tax_class_id' => $this->config->get('item_tax_class_id'),
+                'text'         => "Выбрать пункт выдачи"
+            );
+
+            $quote_data['ship'] = array(
+                'code'         => 'item.ship',
+                'title'        => "Доставка",
+                'cost'         => 0,
+                'tax_class_id' => $this->config->get('item_tax_class_id'),
+                'text'         => "Условия и стоимость уточнит менеджер при подтверждении заказа"
+            );
+            $quote_data['post'] = array(
+                'code'         => 'item.post',
+                'title'        => "Почта России",
+                'cost'         => 0,
+                'tax_class_id' => $this->config->get('item_tax_class_id'),
+                'text'         => "Посчитаем через модуль"
+            );
+            $quote_data['pek'] = array(
+                'code'         => 'item.pek',
+                'title'        => "ПЭК",
+                'cost'         => 0,
+                'tax_class_id' => $this->config->get('item_tax_class_id'),
+                'text'         => "Условия и стоимость уточнит менеджер при подтверждении заказа"
+            );
+            $quote_data['del'] = array(
+                'code'         => 'item.del',
+                'title'        => "Деловые линии",
+                'cost'         => 0,
+                'tax_class_id' => $this->config->get('item_tax_class_id'),
+                'text'         => "Условия и стоимость уточнит менеджер при подтверждении заказа"
+            );
+            $quote_data['dpd'] = array(
+                'code'         => 'item.dpd',
+                'title'        => "DPD",
+                'cost'         => 0,
+                'tax_class_id' => $this->config->get('item_tax_class_id'),
+                'text'         => "Условия и стоимость уточнит менеджер при подтверждении заказа"
+            );
+
 
 			$method_data = array(
 				'code'       => 'item',
