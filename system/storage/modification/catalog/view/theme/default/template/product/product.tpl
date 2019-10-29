@@ -135,10 +135,10 @@
             <?php if ($manufacturer) { ?>
             <li><?php echo $text_manufacturer; ?> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a></li>
             <?php } ?>
-            <li><?php echo $text_product_id; ?> <?php echo $product_id; ?></li>
-            <li><?php echo $text_articul; ?> <?php echo $articul; ?></li>
+            <li><?php echo $text_product_id; ?>: <?php echo $product_id; ?></li>
+            <li><?php echo $text_articul; ?>: <?php echo $articul; ?></li>
             <li><?php echo $text_manufacturer; ?> <?php echo $manufacturer; ?></li>
-            <li><?php echo $text_pack; ?> <?php echo $pack; ?></li>
+            <li><?php echo $text_pack; ?>: <?php echo $pack; ?></li>
           </ul>
           <?php if ($price) { ?>
           <ul class="list-unstyled">
@@ -317,10 +317,6 @@
               <?php } ?>
               <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"><?php echo $reviews; ?></a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"><?php echo $text_write; ?></a></p>
             <hr>
-            <!-- AddThis Button BEGIN -->
-            <div class="addthis_toolbox addthis_default_style" data-url="<?php echo $share; ?>"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
-            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script>
-            <!-- AddThis Button END -->
           </div>
           <?php } ?>
         </div>
