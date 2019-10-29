@@ -32,6 +32,7 @@ $_['text_month']                              = 'месяц';
 $_['text_year']                               = 'год';
 $_['text_product_id']                         = 'Код';
 $_['text_articul']                            = 'Артикул производителя';
+$_['text_pack']                               = 'Фасовка';
 
 // Entry
 $_['entry_qty']                               = 'Количество';

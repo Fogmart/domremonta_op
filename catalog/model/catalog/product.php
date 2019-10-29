@@ -41,6 +41,7 @@ class ModelCatalogProduct extends Model {
 				'length'           => $query->row['length'],
 				'width'            => $query->row['width'],
 				'height'           => $query->row['height'],
+                'pack'             => $query->row['pack'],
 				'length_class_id'  => $query->row['length_class_id'],
 				'subtract'         => $query->row['subtract'],
 				'rating'           => round($query->row['rating']),

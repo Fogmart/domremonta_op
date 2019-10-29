@@ -128,9 +128,10 @@
             <?php if ($manufacturer) { ?>
             <li><?php echo $text_manufacturer; ?> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a></li>
             <?php } ?>
-            <li><?php echo $text_product_id; ?> <?php echo $product_id; ?></li>
-            <li><?php echo $text_articul; ?> <?php echo $articul; ?></li>
+            <li><?php echo $text_product_id; ?>: <?php echo $product_id; ?></li>
+            <li><?php echo $text_articul; ?>: <?php echo $articul; ?></li>
             <li><?php echo $text_manufacturer; ?> <?php echo $manufacturer; ?></li>
+            <li><?php echo $text_pack; ?>: <?php echo $pack; ?></li>
           </ul>
           <?php if ($price) { ?>
           <ul class="list-unstyled">

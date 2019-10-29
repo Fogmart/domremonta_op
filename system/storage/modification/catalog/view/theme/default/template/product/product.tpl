@@ -128,7 +128,7 @@
         <div class="<?php echo $class; ?>">
           <div class="btn-group">
             <button type="button" data-toggle="tooltip" class="btn btn-default" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="fa fa-heart"></i></button>
-            <button type="button" data-toggle="tooltip" class="btn btn-default" title="<?php echo $button_compare; ?>" onclick="compare.add('<?php echo $product_id; ?>');"><i class="fa fa-exchange"></i></button>
+
           </div>
           <h1><?php echo $heading_title; ?></h1>
           <ul class="list-unstyled">
@@ -138,11 +138,7 @@
             <li><?php echo $text_product_id; ?> <?php echo $product_id; ?></li>
             <li><?php echo $text_articul; ?> <?php echo $articul; ?></li>
             <li><?php echo $text_manufacturer; ?> <?php echo $manufacturer; ?></li>
-
-            <?php if ($reward) { ?>
-            <li><?php echo $text_reward; ?> <?php echo $reward; ?></li>
-            <?php } ?>
-            <li><?php echo $text_stock; ?> <?php echo $stock; ?></li>
+            <li><?php echo $text_pack; ?> <?php echo $pack; ?></li>
           </ul>
           <?php if ($price) { ?>
           <ul class="list-unstyled">

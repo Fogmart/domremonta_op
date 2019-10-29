@@ -245,6 +245,7 @@ class ControllerProductProduct extends Controller {
 			$data['text_loading'] = $this->language->get('text_loading');
 			$data['text_product_id'] = $this->language->get('text_product_id');
 			$data['text_articul'] = $this->language->get('text_articul');
+			$data['text_pack'] = $this->language->get('text_pack');
 
 			$data['entry_qty'] = $this->language->get('entry_qty');
 			$data['entry_name'] = $this->language->get('entry_name');
@@ -326,6 +327,9 @@ $data['mpn'] = $product_info['mpn'];
 			} else {
 				$data['special'] = false;
 			}
+            $data['pack'] = $product_info['pack'];
+
+
 
 			if ($this->config->get('config_tax')) {
 				$data['tax'] = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
@@ -460,6 +464,7 @@ $data['mpn'] = $product_info['mpn'];
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
+					'pack'        => $result['pack'],
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $rating,

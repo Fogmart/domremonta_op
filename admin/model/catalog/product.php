@@ -139,6 +139,7 @@ class ModelCatalogProduct extends Model {
             "', shipping = '" . (int)$data['shipping'] .
             "', price = '" . (float)$data['price'] .
             "', oldprice = '" . (float)$data['oldprice'] .
+            "', pack = '" . $data['pack'] .
             "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
 
 		if (isset($data['image'])) {

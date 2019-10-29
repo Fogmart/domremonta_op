@@ -614,6 +614,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_reward'] = $this->language->get('entry_reward');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
+		$data['entry_pack'] = $this->language->get('entry_pack');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -864,6 +865,13 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['oldprice'] = '';
 		}
+        if (isset($this->request->post['pack'])) {
+            $data['pack'] = $this->request->post['pack'];
+        } elseif (!empty($product_info)) {
+            $data['pack'] = $product_info['pack'];
+        } else {
+            $data['pack'] = '';
+        }
 
 		$this->load->model('catalog/recurring');
 
