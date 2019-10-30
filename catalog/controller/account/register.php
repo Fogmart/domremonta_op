@@ -77,6 +77,7 @@ class ControllerAccountRegister extends Controller {
 		$data['entry_lastname'] = $this->language->get('entry_lastname');
 		$data['entry_email'] = $this->language->get('entry_email');
 		$data['entry_telephone'] = $this->language->get('entry_telephone');
+		$data['entry_isagent'] = $this->language->get('entry_isagent');
 
 
 		$data['entry_newsletter'] = $this->language->get('entry_newsletter');
@@ -303,7 +304,7 @@ class ControllerAccountRegister extends Controller {
             }
 		}
 
-		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
+		if ((utf8_strlen($this->request->post['password']) < 8) || (utf8_strlen($this->request->post['password']) > 20)) {
 			$this->error['password'] = $this->language->get('error_password');
 		}
 

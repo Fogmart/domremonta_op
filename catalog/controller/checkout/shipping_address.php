@@ -122,6 +122,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 					$this->load->model('account/address');
 
 					$this->session->data['shipping_address'] = $this->model_account_address->getAddress($this->request->post['address_id']);
+					$this->session->data['payment_address'] = $this->model_account_address->getAddress($this->request->post['address_id']);
 
 					unset($this->session->data['shipping_method']);
 					unset($this->session->data['shipping_methods']);
@@ -201,3 +202,6 @@ class ControllerCheckoutShippingAddress extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 }
+
+
+

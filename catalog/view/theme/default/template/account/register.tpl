@@ -78,6 +78,13 @@
               <?php } ?>
             </div>
           </div>
+          <div class="form-group ">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+              <input type="checkbox" name="isagent" value="1" id="input-isagent"  />
+              <label class="control-label" for="input-isagent"><?php echo $entry_isagent; ?></label>
+            </div>
+          </div>
           <?php foreach ($custom_fields as $custom_field) { ?>
           <?php if ($custom_field['location'] == 'account') { ?>
           <?php if ($custom_field['type'] == 'select') { ?>

@@ -69,7 +69,7 @@
               </ul>
             </li>
             <li><a href="<?php echo $informations[4]['href']; ?>">Компаниям</a></li>
-            <li><a href="<?php echo $informations[5]['href']; ?>">Новости</a></li>
+            <li><a href="/index.php?route=information/news">Новости</a></li>
             <li><a href="<?php echo $informations[6]['href']; ?>">Контакты</a></li>
             <?php if (!$logged) {?>
             <li><span>Вход/Регистрация</span>
