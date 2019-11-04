@@ -22,7 +22,7 @@ class ModelExtensionPaymentCOD extends Model {
 		if ($status) {
 			$method_data = array(
 				'code'       => 'cod',
-				'title'      => $this->language->get('text_title'),
+				'title'      => 'Оплата картой',
 				'terms'      => '',
 				'sort_order' => $this->config->get('cod_sort_order')
 			);

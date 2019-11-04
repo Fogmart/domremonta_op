@@ -1,7 +1,19 @@
 <?php
 class ModelAccountAddress extends Model {
 	public function addAddress($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$this->customer->getId() . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "', custom_field = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "'");
+	    $query = "INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$this->customer->getId() .
+            "', firstname = '" . $this->db->escape($data['firstname']) .
+            "', lastname = '" . $this->db->escape($data['lastname']) . "' ";
+
+	    if (isset($data['company'])) $query .= ", street = '" . $this->db->escape($data['company']) . "' ";
+	    if (isset($data['street'])) $query .= ", street = '" . $this->db->escape($data['street']) . "' ";
+	    if (isset($data['house'])) $query .= ", house = '" . $this->db->escape($data['house']) . "' ";
+	    if (isset($data['room'])) $query .= ", room = '" . $this->db->escape($data['room']) . "' ";
+
+        $query .= ", postcode = '" . $this->db->escape($data['postcode']) .
+            "', city = '" . $this->db->escape($data['city']) .
+            "', custom_field = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "'";
+		$this->db->query($query);
 
 		$address_id = $this->db->getLastId();
 
@@ -62,6 +74,9 @@ class ModelAccountAddress extends Model {
 				'postcode'       => $address_query->row['postcode'],
 				'city'           => $address_query->row['city'],
 				'zone_id'        => $address_query->row['zone_id'],
+				'street'         => $address_query->row['street'],
+				'house'          => $address_query->row['house'],
+				'room'           => $address_query->row['room'],
 				'zone'           => $zone,
 				'zone_code'      => $zone_code,
 				'country_id'     => $address_query->row['country_id'],
@@ -118,6 +133,9 @@ class ModelAccountAddress extends Model {
 				'postcode'       => $result['postcode'],
 				'city'           => $result['city'],
 				'zone_id'        => $result['zone_id'],
+                'street'         => $result['street'],
+                'house'          => $result['house'],
+                'room'           => $result['room'],
 				'zone'           => $zone,
 				'zone_code'      => $zone_code,
 				'country_id'     => $result['country_id'],

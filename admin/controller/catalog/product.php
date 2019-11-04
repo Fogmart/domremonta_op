@@ -72,9 +72,23 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+
+
 			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
 
-			$this->session->data['success'] = $this->language->get('text_success');
+            if (isset($this->request->files["product_description"]["name"][1]["certfile"])){
+                if ($this->request->files["product_description"]["name"][1]["certfile"] != "") {
+                    $id = $this->request->get['product_id'];
+                    $filename = "certs/" . $id . "_" . basename($this->request->files["product_description"]["name"][1]["certfile"]);
+                    move_uploaded_file(
+                        $this->request->files["product_description"]["tmp_name"][1]["certfile"],
+                        $_SERVER ["DOCUMENT_ROOT"] . "/" . $filename);
+                    $this->model_catalog_product->saveFile($this->request->get['product_id'], $filename);
+                }
+            }
+
+
+            $this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
 
@@ -561,6 +575,8 @@ class ControllerCatalogProduct extends Controller {
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_description'] = $this->language->get('entry_description');
+		$data['entry_cert'] = $this->language->get('entry_cert');
+		$data['entry_certfile'] = $this->language->get('entry_certfile');
 		$data['entry_meta_title'] = $this->language->get('entry_meta_title');
 		$data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
@@ -821,6 +837,13 @@ class ControllerCatalogProduct extends Controller {
 			$data['location'] = $product_info['location'];
 		} else {
 			$data['location'] = '';
+		}
+		if (isset($this->request->post['cert'])) {
+			$data['cert'] = $this->request->post['cert'];
+		} elseif (!empty($product_info)) {
+			$data['cert'] = $product_info['cert'];
+		} else {
+			$data['cert'] = '';
 		}
 
 		$this->load->model('setting/store');

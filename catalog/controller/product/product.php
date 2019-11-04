@@ -273,6 +273,7 @@ class ControllerProductProduct extends Controller {
 			$data['tab_description'] = $this->language->get('tab_description');
 			$data['tab_attribute'] = $this->language->get('tab_attribute');
 			$data['tab_review'] = sprintf($this->language->get('tab_review'), $product_info['reviews']);
+			$data['tab_certs'] = $this->language->get('tab_certs');
 
 			$data['product_id'] = (int)$this->request->get['product_id'];
 			$data['manufacturer'] = $product_info['manufacturer'];
@@ -285,6 +286,9 @@ class ControllerProductProduct extends Controller {
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+			$data['cert'] = html_entity_decode($product_info['cert'], ENT_QUOTES, 'UTF-8');
+
+            $data['certfile']  = $this->model_catalog_product->getProductFile($product_id);
 
 			if ($product_info['quantity'] <= 0) {
 				$data['stock'] = $product_info['stock_status'];

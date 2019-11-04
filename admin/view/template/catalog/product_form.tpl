@@ -90,6 +90,23 @@
                       <input type="text" name="product_description[<?php echo $language['language_id']; ?>][tag]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['tag'] : ''; ?>" placeholder="<?php echo $entry_tag; ?>" id="input-tag<?php echo $language['language_id']; ?>" class="form-control" />
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-cert<?php echo $language['language_id']; ?>"><?php echo $entry_cert; ?></label>
+                    <div class="col-sm-10">
+                      <textarea name="product_description[<?php echo $language['language_id']; ?>][cert]" rows="5" placeholder="<?php echo $entry_cert; ?>" id="input-cert<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['cert'] : ''; ?></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-certfile<?php echo $language['language_id']; ?>"><?php echo $entry_certfile; ?></label>
+                    <div class="col-sm-10">
+                      <input type="file" name="product_description[<?php echo $language['language_id']; ?>][certfile]" >
+                    </div>
+                  </div>
+
+
+
                 </div>
                 <?php } ?>
               </div>

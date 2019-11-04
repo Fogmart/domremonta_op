@@ -4,7 +4,7 @@
 <?php if ($shipping_methods) { ?>
 <p><?php echo $text_shipping_method; ?></p>
 <?php foreach ($shipping_methods as $shipping_method) { ?>
-<p><strong><?php echo $shipping_method['title']; ?></strong></p>
+
 <?php if (!$shipping_method['error']) { ?>
 <?php foreach ($shipping_method['quote'] as $quote) { ?>
 <div class="radio">
@@ -18,17 +18,12 @@
     <?php echo $quote['title']; ?> - <?php echo $quote['text']; ?></label>
 </div>
 <?php } ?>
+<div>
+  Стоимость доставки может быть изменена в случае смены расценок транспортных компаний или при заказе дополнительных услуг (страховка, паллетирование и др.). Подробности Вам сообщит менеджер.
+</div>
 <?php } else { ?>
 <div class="alert alert-danger"><?php echo $shipping_method['error']; ?></div>
 <?php } ?>
 <?php } ?>
 <?php } ?>
-<p><strong><?php echo $text_comments; ?></strong></p>
-<p>
-  <textarea name="comment" rows="8" class="form-control"><?php echo $comment; ?></textarea>
-</p>
-<div class="buttons">
-  <div class="pull-right">
-    <input type="button" value="<?php echo $button_continue; ?>" id="button-shipping-method" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" />
-  </div>
-</div>
+

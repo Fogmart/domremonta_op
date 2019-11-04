@@ -27,6 +27,8 @@ $_['column_action']          = 'Действие';
 // Entry
 $_['entry_name']             = 'Название товара';
 $_['entry_description']      = 'Описание';
+$_['entry_cert']             = 'Гарантии/Сертификаты';
+$_['entry_certfile']         = 'Файл сертификата';
 $_['entry_meta_title'] 	     = 'Мета-тег Title';
 $_['entry_meta_keyword'] 	 = 'Мета-тег Keyword';
 $_['entry_meta_description'] = 'Мета-тег Description';

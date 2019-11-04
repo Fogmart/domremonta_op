@@ -3,7 +3,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 	public function index() {
 		$this->load->language('checkout/checkout');
 
-		if (isset($this->session->data['payment_address']) ) {
+//		if (isset($this->session->data['payment_address']) ) {
 			// Totals
 			$totals = array();
 			$taxes = $this->cart->getTaxes();
@@ -45,12 +45,17 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			$results = $this->model_extension_extension->getExtensions('payment');
 
 			$recurring = $this->cart->hasRecurringProducts();
+            $addr = [
+              'country_id' => 176,
+              'zone_id' => 46,
+            ];
 
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('extension/payment/' . $result['code']);
 
-					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+					$method = $this->{'model_extension_payment_' . $result['code']}
+					    ->getMethod($addr, $total);
 
 					if ($method) {
 						if ($recurring) {
@@ -73,7 +78,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
 			$this->session->data['payment_methods'] = $method_data;
-		}
+//		}
 
 		$data['text_payment_method'] = $this->language->get('text_payment_method');
 		$data['text_comments'] = $this->language->get('text_comments');
@@ -136,9 +141,9 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		$json = array();
 
 		// Validate if payment address has been set.
-		if (!isset($this->session->data['payment_address'])) {
-			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
-		}
+//		if (!isset($this->session->data['payment_address'])) {
+//			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
+//		}
 
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
@@ -175,15 +180,15 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
 
-			if ($information_info && !isset($this->request->post['agree'])) {
-				$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
-			}
+//			if ($information_info && !isset($this->request->post['agree'])) {
+//				$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
+//			}
 		}
 
 		if (!$json) {
 			$this->session->data['payment_method'] = $this->session->data['payment_methods'][$this->request->post['payment_method']];
 
-			$this->session->data['comment'] = strip_tags($this->request->post['comment']);
+//			$this->session->data['comment'] = strip_tags($this->request->post['comment']);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

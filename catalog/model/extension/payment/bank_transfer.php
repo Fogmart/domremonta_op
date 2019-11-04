@@ -26,6 +26,8 @@ class ModelExtensionPaymentBankTransfer extends Model {
 			);
 		}
 
+
+
 		return $method_data;
 	}
 }

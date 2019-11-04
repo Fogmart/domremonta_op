@@ -115,7 +115,8 @@
   </div>
 
 </header>
-<?php if ($categories) { ?>
+<?php //if ($categories) { ?>
+<?php if (0==1) { ?>
 <div class="container">
   <nav id="menu" class="navbar">
     <div class="navbar-header"><span id="category" class="visible-xs"><?php echo $text_category; ?></span>

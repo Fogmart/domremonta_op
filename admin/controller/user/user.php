@@ -499,9 +499,18 @@ class ControllerUserUser extends Controller {
 		}
 
 		if ($this->request->post['password'] || (!isset($this->request->get['user_id']))) {
-			if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
+			if ((utf8_strlen($this->request->post['password']) < 8) || (utf8_strlen($this->request->post['password']) > 20)) {
 				$this->error['password'] = $this->language->get('error_password');
 			}
+            $password = $this->request->post['password'];
+            $uppercase = preg_match('@[A-Z]@', $password);
+            $lowercase = preg_match('@[a-z]@', $password);
+            $number    = preg_match('@[0-9]@', $password);
+            $spec      = preg_match('@\W@', $password);
+
+            if(!$uppercase || !$lowercase || !$number || !$spec ) {
+                $this->error['password'] = $this->language->get('error_password_val');
+            }
 
 			if ($this->request->post['password'] != $this->request->post['confirm']) {
 				$this->error['confirm'] = $this->language->get('error_confirm');

@@ -3,7 +3,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 	public function index() {
 		$this->load->language('checkout/checkout');
 
-		if (isset($this->session->data['shipping_address'])) {
+//		if (isset($this->session->data['shipping_address'])) {
 			// Shipping Methods
 			$method_data = array();
 
@@ -11,11 +11,16 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 			$results = $this->model_extension_extension->getExtensions('shipping');
 
+            $addr = [
+                'country_id' => 176,
+                'zone_id' => 46,
+            ];
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('extension/shipping/' . $result['code']);
 
-					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
+					$quote = $this->{'model_extension_shipping_' . $result['code']}
+					    ->getQuote($addr);
 
 					if ($quote) {
 						$method_data[$result['code']] = array(
@@ -37,7 +42,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
 			$this->session->data['shipping_methods'] = $method_data;
-		}
+//		}
 
 		$data['text_shipping_method'] = $this->language->get('text_shipping_method');
 		$data['text_comments'] = $this->language->get('text_comments');

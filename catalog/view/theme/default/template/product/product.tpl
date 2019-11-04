@@ -41,6 +41,7 @@
             <?php if ($review_status) { ?>
             <li><a href="#tab-review" data-toggle="tab"><?php echo $tab_review; ?></a></li>
             <?php } ?>
+            <li><a href="#tab-certs" data-toggle="tab"><?php echo $tab_certs; ?></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-description"><?php echo $description; ?></div>
@@ -116,6 +117,12 @@
               </form>
             </div>
             <?php } ?>
+            <div class="tab-pane" id="tab-certs">
+              <p><?php echo $cert; ?></p>
+              <?php foreach ($certfile as $d){ ?>
+              <p> <a href="<?=$d['file']?>" download>Скачать</a> </p>
+              <?php } ?>
+            </div>
           </div>
         </div>
         <?php if ($column_left || $column_right) { ?>

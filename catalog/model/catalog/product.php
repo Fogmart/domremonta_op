@@ -12,6 +12,7 @@ class ModelCatalogProduct extends Model {
 				'product_id'       => $query->row['product_id'],
 				'name'             => $query->row['name'],
 				'description'      => $query->row['description'],
+				'cert'             => $query->row['cert'],
 				'meta_title'       => $query->row['meta_title'],
 				'meta_description' => $query->row['meta_description'],
 				'meta_keyword'     => $query->row['meta_keyword'],
@@ -545,4 +546,18 @@ class ModelCatalogProduct extends Model {
 			return 0;
 		}
 	}
+
+	public function getProductDownloads($product_id) {
+        $que = "select d.* from " . DB_PREFIX . "download d
+                    join " . DB_PREFIX . "product_to_download td on (td.download_id = d.download_id)
+                    where td.product_id = '" .$product_id . "'";
+        $query = $this->db->query($que);
+        return $query->rows;
+    }
+
+    public function getProductFile($product_id) {
+        $que = "select d.* from " . DB_PREFIX . "product_files d where d.product_id = '" .$product_id . "'";
+        $query = $this->db->query($que);
+        return $query->rows;
+    }
 }

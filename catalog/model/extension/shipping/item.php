@@ -27,13 +27,13 @@ class ModelExtensionShippingItem extends Model {
 			$quote_data = array();
 
 
-            $quote_data['self'] = array(
-                'code'         => 'item.self',
-                'title'        => "Самовывоз",
-                'cost'         => 0,
-                'tax_class_id' => $this->config->get('item_tax_class_id'),
-                'text'         => "Выбрать пункт выдачи"
-            );
+//            $quote_data['self'] = array(
+//                'code'         => 'item.self',
+//                'title'        => "Самовывоз",
+//                'cost'         => 0,
+//                'tax_class_id' => $this->config->get('item_tax_class_id'),
+//                'text'         => "Выбрать пункт выдачи"
+//            );
 
             $quote_data['ship'] = array(
                 'code'         => 'item.ship',
