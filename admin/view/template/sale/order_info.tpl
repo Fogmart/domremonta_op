@@ -189,6 +189,23 @@
             <?php } ?>
           </tbody>
         </table>
+
+        <?php if ($date_pref) { ?>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <td>Желаемая дата получения</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><?php echo $date_pref; ?></td>
+          </tr>
+          </tbody>
+        </table>
+        <?php } ?>
+
+
         <?php if ($comment) { ?>
         <table class="table table-bordered">
           <thead>

@@ -1,4 +1,5 @@
 <?php echo $header; ?>
+
 <div class="container">
   <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -41,6 +42,13 @@
                              checked
                              onclick="updshipViz()"><label for="dost1">Самовывоз</label>
                       <input type="radio" id="dost2" name="dost" value="1" onclick="updshipViz()"><label for="dost2">Доставка</label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-2" id="collapse-date-pref">
+                  <label class="slf"> Желаемая дата самовывоза </label>
+                  <label class="shiplbl"> Желаемая дата доставки </label>
+                  <input type="text" id="date_pref" name="date_pref" class="form-control" />
               </div>
           </div>
 
@@ -133,14 +141,24 @@ $(document).ready(function() {
       }
     });
     $(".ship").hide()
+    $(".shiplbl").hide()
+
+    $('#date_pref').datetimepicker({
+        pickTime: false,
+    });
+
 });
     <?php } ?>
 function updshipViz() {
     var v = $("[name=dost]:checked").val()
     if (v == 1){
         $(".ship").slideDown()
+        $(".shiplbl").show()
+        $(".slf").hide()
     } else {
         $(".ship").slideUp()
+        $(".shiplbl").hide()
+        $(".slf").show()
     }
 }
 
@@ -198,7 +216,7 @@ function updshipViz() {
         $.ajax({
             url: 'index.php?route=checkout/payment_method/save',
             type: 'post',
-            data: $('#collapse-payment-method input[type=\'radio\']:checked, #collapse-payment-method input[type=\'checkbox\']:checked, #collapse-payment-method textarea'),
+            data: $('#collapse-payment-method input[type=\'radio\']:checked, #collapse-payment-method input[type=\'checkbox\']:checked, #collapse-payment-method textarea, #collapse-date-pref input'),
             dataType: 'json',
             beforeSend: function() {
                 $('#button-payment-method').button('loading');
@@ -276,4 +294,6 @@ function updshipViz() {
 
 
 //--></script>
+
+
 <?php echo $footer; ?>

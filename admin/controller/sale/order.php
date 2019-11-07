@@ -1074,6 +1074,7 @@ class ControllerSaleOrder extends Controller {
 				);
 			}
 
+			$data['date_pref'] = $order_info['date_pref'];
 			$data['comment'] = nl2br($order_info['comment']);
 
 			$this->load->model('customer/customer');

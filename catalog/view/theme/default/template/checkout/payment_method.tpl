@@ -20,7 +20,10 @@
 </div>
 <?php } ?>
 <?php } ?>
-
+<p><strong><?php echo $text_comments; ?></strong></p>
+<p>
+  <textarea name="comment" rows="8" class="form-control"><?php echo $comment; ?></textarea>
+</p>
 <?php if ($text_agree) { ?>
 
 </div>

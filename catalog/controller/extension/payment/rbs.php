@@ -32,6 +32,7 @@ class ControllerExtensionPaymentRbs extends Controller {
 
         $this->load->model('checkout/order');
         $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+        print_r($order_info);
         $order_number = $this->session->data['order_id'];
         $amount = (int) $order_info['total'] * 100;
         $return_url = $this->url->link('extension/payment/rbs/callback','',true);
@@ -98,7 +99,7 @@ class ControllerExtensionPaymentRbs extends Controller {
         $this->rbs->stage = $this->config->get('rbs_stage');
         $this->rbs->mode = $this->config->get('rbs_mode');
         $this->rbs->logging = $this->config->get('rbs_logging');
-        $this->rbs->currency = $this->config->get('rbs_currency');
+//        $this->rbs->currency = $this->config->get('rbs_currency');
     }
 
     /**

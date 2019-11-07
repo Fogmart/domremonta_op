@@ -56,6 +56,7 @@ class ModelCheckoutOrder extends Model {
             "', forwarded_ip = '" .  $this->db->escape($data['forwarded_ip']) .
             "', user_agent = '" . $this->db->escape($data['user_agent']) .
             "', accept_language = '" . $this->db->escape($data['accept_language']) .
+            "', date_pref = '" . $this->db->escape($data['date_pref']) .
             "', date_added = NOW(), date_modified = NOW()");
 
 
