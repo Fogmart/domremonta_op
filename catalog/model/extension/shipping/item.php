@@ -37,7 +37,7 @@ class ModelExtensionShippingItem extends Model {
 
             $quote_data['ship'] = array(
                 'code'         => 'item.ship',
-                'title'        => "Доставка",
+                'title'        => "Собственная доставка",
                 'cost'         => 0,
                 'tax_class_id' => $this->config->get('item_tax_class_id'),
                 'text'         => "Условия и стоимость уточнит менеджер при подтверждении заказа"

@@ -119,6 +119,7 @@ $(document).ready(function() {
       success: function(html) {
         $('#collapse-shipping-method').html(html);
         $('#collapse-shipping-method').show();
+          $("[name=shipping_method]").click(updPayViz)
       },
       error: function(xhr, ajaxOptions, thrownError) {
         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -146,6 +147,10 @@ $(document).ready(function() {
     $('#date_pref').datetimepicker({
         pickTime: false,
     });
+    updPayViz()
+    $("[name=shipping_method]").each(function () {
+        $(this).click(updPayViz)
+    })
 
 });
     <?php } ?>
@@ -160,6 +165,26 @@ function updshipViz() {
         $(".shiplbl").hide()
         $(".slf").show()
     }
+    updPayViz()
+}
+
+function updPayViz(){
+    var v = $("[name=dost]:checked").val()
+    var show_cod = true
+    if (v == 1){
+        if ($("[name=shipping_method]:checked").val() == 'item.ship') show_cod = false
+    }
+
+    $("[name=payment_method]").each(function () {
+        if ($(this).val()=='cod'){
+            if (show_cod){
+                $(this).parent().show()
+            } else {
+                $(this).parent().hide()
+            }
+        }
+    })
+
 }
 
 
