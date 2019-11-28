@@ -92,7 +92,9 @@ class ControllerExtensionPaymentBankTransfer extends Controller {
             $mail->smtp_port = $this->config->get('config_mail_smtp_port');
             $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
-            $mail->setTo("aifogmart@mail.ru");
+
+
+            $mail->setTo($this->customer->getEmail());
             $mail->setFrom($this->config->get('config_email'));
             $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
             $mail->setSubject(html_entity_decode("Счет на оплату", ENT_QUOTES, 'UTF-8'));
