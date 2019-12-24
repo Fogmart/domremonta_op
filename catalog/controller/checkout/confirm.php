@@ -224,7 +224,7 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 
 			$order_data['products'] = array();
-
+            $addcomment = "";
 			foreach ($this->cart->getProducts() as $product) {
 				$option_data = array();
 
@@ -238,6 +238,7 @@ class ControllerCheckoutConfirm extends Controller {
 						'value'                   => $option['value'],
 						'type'                    => $option['type']
 					);
+                    $addcomment .= $option['name'] . ":" . $option['value']."; ";
 				}
 
 				$order_data['products'][] = array(
@@ -275,8 +276,8 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 
 			$order_data['comment'] = $this->session->data['comment'];
+			if ($addcomment) $order_data['comment'] .= ' Опции: ' . $addcomment;
 			$order_data['date_pref'] = $this->session->data['date_pref'];
-//			$order_data['comment'] = "";
 			$order_data['total'] = $total_data['total'];
 
 			if (isset($this->request->cookie['tracking'])) {
